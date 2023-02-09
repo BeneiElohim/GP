@@ -1,0 +1,443 @@
+/*
+
+The Game Project
+
+Week 4
+
+Midterm Submission-Ismail Mert Tarihci
+
+*/
+
+//Game Character Positions
+var gameChar_x;
+var gameChar_y;
+var floorPos_y;
+//Bools for controling the animation of the character.
+var isLeft;
+var isRight;
+var isPlummeting;
+var isFalling;
+//Bool for the welcome menu
+var isMenu;
+//variable for the scenery
+var trees_x;
+var treePos_y;
+var cloud;
+var mountain;
+var stars;
+//Camera
+var cameraPosX;
+//Game Score
+var game_score;
+//Flagpole for game end
+var flagpole;
+//Lives variable
+var lives = 3;
+//Multiple collectables
+var collectables;
+//Multiple canyons
+var canyons;
+//Menu fade code to control menu fade in/out
+var menuFade = 255;
+function setup()
+{
+    //background
+    createCanvas(1024, 576);
+    floorPos_y = height * 3/4;
+    gameChar_x = width/2;
+    gameChar_y = floorPos_y;
+    startGame();
+}
+function draw()
+{
+    //Positioning the camera to the center of the character
+    cameraPosX = gameChar_x- width/2;
+    ///////////DRAWING CODE//////////
+    background(30,30,30); //fill the black background
+    noStroke();
+    fill(0,155,0);
+    rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
+    push();
+    translate(-cameraPosX,0)
+    //draw mountains with function
+    drawMountains();
+    //Tree drawing function
+    drawTrees();
+    //Cloud drawing function
+    drawClouds();
+    //Stars drawing function
+    drawStars();
+    //the game character
+    if(isLeft && isFalling)
+    {
+        // add your jumping-left code
+        fill(200,0,10)
+        ellipse(gameChar_x,gameChar_y-70,20,20);
+        fill(38, 104, 0);
+        rect(gameChar_x-10,gameChar_y-60,20,30);
+        fill(60,105,225);
+        rect(gameChar_x-16,gameChar_y-40,8,10);
+        rect(gameChar_x-2,gameChar_y-40,8,10);
+    }
+    else if(isRight && isFalling)
+    {
+        // add your jumping-right code
+        fill(200,0,10)
+        ellipse(gameChar_x,gameChar_y-70,20,20);
+        fill(38, 104, 0);
+        rect(gameChar_x-10,gameChar_y-60,20,30);
+        fill(60,105,225);
+        rect(gameChar_x-4,gameChar_y-40,8,10);
+        rect(gameChar_x+10,gameChar_y-40,8,10);
+    }
+    else if(isLeft)
+    {
+        // add your walking left code
+        fill(200,0,10)
+        ellipse(gameChar_x,gameChar_y-70,20,20);
+        fill(38, 104, 0);
+        rect(gameChar_x-10,gameChar_y-60,20,50);
+        fill(60,105,225);
+        rect(gameChar_x-16,gameChar_y-10,8,10);
+        rect(gameChar_x-2,gameChar_y-10,8,10);
+    }
+    else if(isRight)
+    {
+        // add your walking right code
+        fill(200,0,10)
+        ellipse(gameChar_x,gameChar_y-70,20,20);
+        fill(38, 104, 0);
+        rect(gameChar_x-10,gameChar_y-60,20,50);
+        fill(60,105,225);
+        rect(gameChar_x-4,gameChar_y-10,8,10);
+        rect(gameChar_x+10,gameChar_y-10,8,10);
+    }
+    else if(isFalling || isPlummeting)
+    {
+        // add your jumping facing forwards code
+        fill(200,0,10)
+        ellipse(gameChar_x,gameChar_y-70,20,20);
+        fill(38, 104, 0);
+        rect(gameChar_x-10,gameChar_y-60,20,30);
+        fill(60,105,225);
+        rect(gameChar_x-10,gameChar_y-30,8,10);
+        rect(gameChar_x+2,gameChar_y-40,8,10);
+    }
+    else
+    {
+        //  standing front facing code
+        fill(200,0,10)
+        ellipse(gameChar_x,gameChar_y-70,20,20);
+        fill(38, 104, 0);
+        rect(gameChar_x-10,gameChar_y-60,20,50);
+        fill(60,105,225);
+        rect(gameChar_x-10,gameChar_y-10,8,10);
+        rect(gameChar_x+2,gameChar_y-10,8,10);
+    }
+    for(var i = 0; i < collectables.length; i++) {
+        //check if game character is too close to the collectable
+        if (!collectables[i].isFound) {
+            checkCollectable(collectables[i]);
+            drawCollectable(collectables[i]);
+        }
+    }
+        //check if game character is too close to the canyon
+        for (var k = 0; k < canyons.length; k++) {
+            drawCanyon(canyons[k]);
+            checkCanyon(canyons[k]);}
+
+    renderFlagpole();
+    if(!flagpole.isReached) {
+        checkFlagpole();
+    }
+    checkPlayerDie();
+
+    pop();
+    //Score drawing function
+    fill(255,255,255);
+    noStroke();
+    text("Score: " + game_score, 20, 20);
+
+    ///////////INTERACTION CODE//////////
+
+    //menu controls
+    menuFade = menuFade-1;
+    if (menuFade < 0){
+        isMenu = false;
+    }
+    //Welcome Screen
+    if (isMenu)
+    {
+        var menuWidth = 500;
+        var menuHeight = 150;
+        //Menu box
+        fill(0,0,0,menuFade);
+        rect(250,150,menuWidth,menuHeight);
+        //Menu text
+        fill(255,255,255,menuFade);
+        textSize(20);
+        text("Welcome to the adventures of Roger Grubbie Blubb!", 18+menuWidth/2, 100+menuHeight/2);
+        text("Use WASD to walk around.", 110+menuWidth/2, 120+menuHeight/2);
+        text("Click to skip this.", 110+menuWidth/2, 160+menuHeight/2);
+        textSize(12);
+        text("P.S You can call it RGB Boy! :)", +menuWidth/2, 220+menuHeight/2);
+        //Character Shape
+        fill(200,0,10,menuFade)
+        ellipse(gameChar_x+150,gameChar_y-220,20,20);
+        fill(38, 104, 0,menuFade);
+        rect(gameChar_x+140,gameChar_y-210,20,50);
+        fill(60,105,225,menuFade);
+        rect(gameChar_x+140,gameChar_y-160,8,10);
+        rect(gameChar_x+152,gameChar_y-160,8,10);
+    }
+    //walking left
+    if(isLeft == true)
+    {
+        gameChar_x -= 2;
+    }
+    //walking right
+    if(isRight == true)
+    {
+        gameChar_x += 2;
+    }
+    if(gameChar_y <floorPos_y)
+    {
+        gameChar_y += 2;
+        isFalling = true;
+    }
+    if(gameChar_y >= floorPos_y)
+    {
+        isFalling = false;
+    }
+    if (isPlummeting == true)
+    {
+        gameChar_y += 3;
+    }
+
+}
+function keyPressed()
+{
+    /*If statements to control the characters movement. Should be disable during plummet & log-in menu */
+    if(!isPlummeting &&!isMenu) {
+        if (keyCode == 65) {
+            isLeft = true;
+        }
+        if (keyCode == 68) {
+            isRight = true;
+        }
+        if (keyCode == 87 && !isFalling && !isPlummeting) {
+            gameChar_y = gameChar_y-300;
+        }
+    }
+}
+function keyReleased()
+{
+    // if statements to control the animation of the character when
+    // keys are released.
+    if (keyCode == 65)
+    {
+        isLeft = false;
+    }
+    if (keyCode == 68)
+    {
+        isRight = false;
+    }
+}
+function  mousePressed()
+{
+    //if mouse is pressed, the menu will disappear
+    isMenu = false;
+}
+function drawClouds(){
+    // For loop to traverse the array of clouds
+    for (var j = 0; j < cloud.length; j++)
+    {
+        fill(255,255,255,170);
+        ellipse(cloud[j].x_pos-39,cloud[j].y_pos+4,cloud[j].size);
+        fill(255,255,255,160);
+        ellipse(cloud[j].x_pos-25,cloud[j].y_pos-30,cloud[j].size-10);
+        fill(255,255,255,150);
+        ellipse(cloud[j].x_pos,cloud[j].y_pos+4,cloud[j].size+10);
+        fill(255,255,255,160);
+        ellipse(cloud[j].x_pos,cloud[j].y_pos-30,cloud[j].size-5);
+    }
+}
+function drawMountains(){
+    // for loop to traverse the array of mountains
+    for (var k = 0; k < mountain.length; k++) {
+        fill(54,35,18,220);
+        triangle(mountain[k].x_pos,mountain[k].y_pos,mountain[k].x_pos+300,mountain[k].y_pos,mountain[k].x_pos+150,mountain[k].y_pos-300);
+        fill(270,270,270);
+        quad(mountain[k].x_pos+150,mountain[k].y_pos-300,mountain[k].x_pos+110,mountain[k].y_pos-220,mountain[k].x_pos+150,mountain[k].y_pos-210,mountain[k].x_pos+180,mountain[k].y_pos-240);
+    }
+}
+function drawTrees(){
+    // For loop to traverse the array of trees_x
+    for (var i = 0; i < trees_x.length; i++)
+    {
+        fill(90,40,19);
+        rect(trees_x[i],treePos_y+19,50,130);
+        fill(0,101,0);
+        triangle(trees_x[i]-50,treePos_y+30,trees_x[i]+30,treePos_y-136,trees_x[i]+100,treePos_y+30);
+
+    }
+}
+function drawStars(){
+    //For loop to traverse the array of stars
+    for (var s = 0; s < stars.length; s++){
+        var glistening = random(0,6);
+        fill(255,255,255);
+        ellipse(stars[s].x_pos,stars[s].y_pos,glistening);
+    }
+}
+function drawCollectable(t_collectable){
+    //draw collectable
+    if (!t_collectable.isFound){
+        noStroke();
+        fill(204,55,51);
+        circle(t_collectable.x_pos+6,t_collectable.y_pos+10,t_collectable.size+10);
+        fill(0,110,0);
+        ellipse(t_collectable.x_pos-10,t_collectable.y_pos-15,10,t_collectable.size-10);
+        strokeWeight(5);
+        stroke(41,0,0);
+        line(t_collectable.x_pos+6,t_collectable.y_pos,t_collectable.x_pos+7,t_collectable.y_pos-20);
+    }
+}
+function drawCanyon(t_canyon){
+    //draw canyon
+    fill(56,0,0);
+    rect(t_canyon.x_pos,floorPos_y,t_canyon.width+30,300);
+    fill(94,0,0,110);
+    rect(t_canyon.x_pos,floorPos_y,t_canyon.width+20,300);
+}
+function checkCollectable(t_collectable){
+    //check if collectable is found
+var d = dist(gameChar_x,gameChar_y,t_collectable.x_pos,t_collectable.y_pos);
+    if (d < 50) {
+        t_collectable.isFound = true;
+        game_score += 1;
+    }
+}
+function checkCanyon(t_canyon) {
+    //check if character is over a canyon
+    if (gameChar_x > t_canyon.x_pos && gameChar_x < t_canyon.x_pos + t_canyon.width && gameChar_y >= floorPos_y){
+        isPlummeting = true;
+    }
+}
+function  renderFlagpole()
+{
+    push();
+    strokeWeight(5);
+    stroke(100);
+    line(flagpole.x_pos, floorPos_y, flagpole.x_pos, floorPos_y - 250);
+    noStroke();
+    fill(255, 0, 0);
+    if(flagpole.isReached)
+    {
+        rect(flagpole.x_pos, floorPos_y - 250, 50, 50);
+    }
+    else
+    {
+        rect(flagpole.x_pos, floorPos_y - 50, 50, 50);
+    }
+    pop();
+}
+function checkFlagpole(){
+    var d = abs(gameChar_x - flagpole.x_pos);
+    if (d < 15){
+        flagpole.isReached = true;
+    }
+}
+function checkPlayerDie(){
+    if (gameChar_y > height){
+        --lives;
+        if (lives > 0){
+            startGame();
+        }
+    }
+
+}
+ function startGame() {
+     isLeft = false;
+     isRight = false;
+     isPlummeting = false;
+     isFalling = false;
+     //Tree Positions
+     trees_x = [-1100,-800,-200,-300,300,500,900,1300,1700,2100];
+     treePos_y= floorPos_y- 150
+     //Mountain Positions
+     mountain= [
+         {x_pos: 400, y_pos: 432},
+         {x_pos: 800, y_pos: 432},
+         {x_pos: 1300, y_pos: 432},
+         {x_pos: 2100, y_pos: 432},
+         {x_pos: -400, y_pos: 432}
+     ]
+     //Cloud Positions
+     cloud =
+         [{x_pos: -300, y_pos: 150, size: 50},
+             {x_pos: -100, y_pos: 150, size: 50},
+             {x_pos: 200, y_pos: 150, size: 50},
+             {x_pos: 400, y_pos: 100, size: 50},
+             {x_pos: 600, y_pos: 150, size: 50},
+             {x_pos: 800, y_pos: 100, size: 50},
+             {x_pos: 1000, y_pos: 150, size: 50},
+             {x_pos: 1200, y_pos: 100, size: 50},
+             {x_pos: 1400, y_pos: 150, size: 50},
+             {x_pos: 1600, y_pos: 100, size: 50},
+             {x_pos: 1800, y_pos: 150, size: 50},
+             {x_pos: -500, y_pos: 100, size: 50},
+             {x_pos: -700, y_pos: 150, size: 50},
+             {x_pos: -900, y_pos: 100, size: 50},
+         ]
+     //camera
+     cameraPosX = 0;
+     //stars for the background
+     stars = [{x_pos: -50, y_pos: 60}
+         ,{x_pos: 0, y_pos: 50}
+         ,{x_pos: 100, y_pos: 60}
+         ,{x_pos: 200, y_pos: 60}
+         ,{x_pos: 300, y_pos: 20}
+         ,{x_pos: 400, y_pos: 70}
+         ,{x_pos: 500, y_pos: 40}
+         ,{x_pos: 600, y_pos: 70}
+         ,{x_pos: 700, y_pos: 30}
+         ,{x_pos: 800, y_pos: 60}
+         ,{x_pos: 900, y_pos: 50}
+         ,{x_pos: 1000, y_pos: 40}
+         ,{x_pos: 1100, y_pos: 70}
+         ,{x_pos: 1200, y_pos: 30}
+         ,{x_pos: 1300, y_pos: 60}
+         ,{x_pos: 1400, y_pos: 50}
+         ,{x_pos: 1500, y_pos: 40}]
+     //Canyon objects
+     canyons = [
+         {x_pos: 98, y_pos: 400, width:60 },
+         {x_pos: 598, y_pos: 400, width:110 },
+         {x_pos: 1098, y_pos: 400, width:65 },
+         {x_pos: 1598, y_pos: 400, width:14 },
+         {x_pos: 2098, y_pos: 400, width:70 },]
+//Collectable objects
+     collectables = [
+         { x_pos: 400, y_pos: 400, size: 40,isFound: false},
+         { x_pos: 800, y_pos: 400, size: 40,isFound: false},
+         { x_pos: 1200, y_pos: 400, size: 40,isFound: false},
+         { x_pos: 1600, y_pos: 400, size: 40,isFound: false},
+         { x_pos: 2000, y_pos: 400, size: 40,isFound: false},
+         { x_pos: 2400, y_pos: 400, size: 40,isFound: false},
+         { x_pos: 2800, y_pos: 400, size: 40,isFound: false},
+         { x_pos: -400, y_pos: 400, size: 40,isFound: false},
+         { x_pos: -800, y_pos: 400, size: 40,isFound: false},
+         { x_pos: -1200, y_pos: 400, size: 40,isFound: false},
+         { x_pos: -1600, y_pos: 400, size: 40,isFound: false},]
+      //Flagpole
+     flagpole = {x_pos: 1800, isReached: false }
+     //Menu
+        isMenu = true;
+     //Game Score
+        game_score = 0;
+
+        console.log("Game Started");
+    }
+
+
