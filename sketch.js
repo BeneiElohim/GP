@@ -41,6 +41,9 @@ var canyons;
 var menuFade = 255;
 //Life Shapes for the players remaining lives
 var lifeShape;
+//platforms
+var platforms;
+//enemies
 function setup() {
     //background
     createCanvas(1024, 576);
@@ -139,13 +142,25 @@ function draw() {
         drawCanyon(canyons[k]);
         checkCanyon(canyons[k]);
     }
+    for (var i = 0; i < platforms.length; i++) {
+        platforms[i].draw();
+    }
+
 
     renderFlagpole();
     if (!flagpole.isReached) {
         checkFlagpole();
     }
     checkPlayerDie();
-
+    for (var i = 0; i < enemies.length; i++) {
+        enemies[i].draw();
+        var isContact = enemies[i].checkContact(gameChar_x, gameChar_y);
+        if (isContact && lives > 0) {
+            startGame();
+            console.log("contact");
+            break;
+        }
+    }
     pop();
     //Score drawing function
     fill(255, 255, 255);
@@ -168,9 +183,7 @@ function draw() {
         text("Press space to continue.", 500, 350);
         return;
     }
-
     ///////////INTERACTION CODE//////////
-
     //menu controls
     menuFade = menuFade - 1;
     if (menuFade < 0) {
@@ -209,9 +222,15 @@ function draw() {
         gameChar_x += 2;
     }
     if (gameChar_y < floorPos_y) {
+        for (var i = 0; i < platforms.length; i++) {
+            if (platforms[i].checkContact(gameChar_x, gameChar_y) == true) {
+                isFalling = false;
+                break;
+            }
         gameChar_y += 2;
         isFalling = true;
     }
+}
     if (gameChar_y >= floorPos_y) {
         isFalling = false;
     }
@@ -433,9 +452,15 @@ function startGame() {
     flagpole = { x_pos: 1800, isReached: false }
     //Menu
     isMenu = true;
+    //platforms
+    platforms = [];
+    platforms.push(createPlatforms(100,floorPos_y-100,100));
+    //enemies
+    enemies = [];
+    enemies.push(new Enemies(100, floorPos_y - 10, 100));
     //Game Score
     game_score = 0;
-
+    
     console.log("Game Started");
 }
 function drawLife() {
@@ -459,5 +484,56 @@ function drawLife() {
     ellipse(122, 35, 10);
     }
 }
+function createPlatforms(x,y,length){
 
+    var p = {
+        x: x,
+        y: y,
+        length: length,
+        draw: function(){
+            fill(150);
+            rect(this.x, this.y, this.length, 20);
+        },
+        checkContact: function(gc_x, gc_y){
+            if(gc_x > this.x && gc_x < this.x + this.length){
+                var d = this.y - gc_y;
+                if(d >= 0 && d < 5){
+                    console.log("contact on pt");
+                    return true;
+                }
+            }
+
+        }
+}
+    return p;
+}
+function Enemies(x,y,range){
+    this.x = x;
+    this.y = y;
+    this.range = range;
+    this.currentX = x;
+    this.inc = 1;
+    this.update = function(){
+        this.currentX += this.inc;
+        if(this.currentX >= this.x + this.range){
+            this.inc = -1;
+        }
+        else if (this.currentX < this.x){
+            this.inc = 1;
+        }
+    },
+    this.draw = function(){
+        this.update();
+        fill(255,0,0);
+        ellipse(this.currentX, this.y, 30, 30);
+},
+    this.checkContact = function(gc_x, gc_y){
+        var d = dist(gc_x, gc_y, this.currentX, this.y);
+        if(d < 20){
+            console.log("contact on enemy");
+            return true;
+        }
+        return false;
+}
+}
 
