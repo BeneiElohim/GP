@@ -1,13 +1,3 @@
-/*
-
-The Game Project
-
-Week 4
-
-Midterm Submission-Ismail Mert Tarihci
-
-*/
-
 //Game Character Positions
 var gameChar_x;
 var gameChar_y;
@@ -44,6 +34,13 @@ var lifeShape;
 //platforms
 var platforms;
 //enemies
+//menues
+var welcomeScreen;
+function preload() {
+    soundFormats('mp3', 'ogg');
+    myFont = loadFont("assets/kozmin.otf");
+}
+
 function setup() {
     //background
     createCanvas(1024, 576);
@@ -191,7 +188,9 @@ function draw() {
     }
     //Welcome Screen
     if (isMenu && lives == 3) {
-        var menuWidth = 500;
+         welcomeScreen = new Welcome(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150);
+        welcomeScreen.drawMenu();
+        /*var menuWidth = 500;
         var menuHeight = 150;
         //Menu box
         fill(0, 0, 0, menuFade);
@@ -199,11 +198,12 @@ function draw() {
         //Menu text
         fill(255, 255, 255, menuFade);
         textSize(20);
+        textFont(myFont);
         text("Welcome to the adventures of Roger Grubbie Blubb!", 18 + menuWidth / 2, 100 + menuHeight / 2);
         text("Use WASD to walk around.", 110 + menuWidth / 2, 120 + menuHeight / 2);
         text("Click to skip this.", 110 + menuWidth / 2, 160 + menuHeight / 2);
         textSize(12);
-        text("P.S You can call it RGB Boy! :)", +menuWidth / 2, 220 + menuHeight / 2);
+        text("P.S You can call it RGB Boy! :)", +menuWidth / 2, 220 + menuHeight / 2); */
         //Character Shape
         fill(200, 0, 10, menuFade)
         ellipse(gameChar_x + 150, gameChar_y - 220, 20, 20);
