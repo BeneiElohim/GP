@@ -84,9 +84,9 @@ function Tree(floor) {
   this.drawTree= function() {
     for (var i = 0; i < trees_x.length; i++) {
     fill(90, 40, 19);
-    rect(trees_x[i], treePos_y + 19, 50, 130);
+    rect(trees_x[i], trees_y + 19, 50, 130);
     fill(0, 101, 0);
-    triangle(trees_x[i] - 50, treePos_y + 30, trees_x[i] + 30, treePos_y - 136, trees_x[i] + 100, treePos_y + 30);
+    triangle(trees_x[i] - 50, trees_y + 30, trees_x[i] + 30, trees_y - 136, trees_x[i] + 100, trees_y + 30);
     }
   }
 }

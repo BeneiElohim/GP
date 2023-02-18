@@ -10,8 +10,6 @@ var isFalling;
 //Bool for the welcome menu
 var isMenu;
 //variable for the scenery
-var trees_x;
-var treePos_y;
 var stars;
 //Camera
 var cameraPosX;
@@ -251,16 +249,6 @@ function mousePressed() {
     //if mouse is pressed, the menu will disappear
     isMenu = false;
 }
-function drawTrees() {
-    // For loop to traverse the array of trees_x
-    for (var i = 0; i < trees_x.length; i++) {
-        fill(90, 40, 19);
-        rect(trees_x[i], treePos_y + 19, 50, 130);
-        fill(0, 101, 0);
-        triangle(trees_x[i] - 50, treePos_y + 30, trees_x[i] + 30, treePos_y - 136, trees_x[i] + 100, treePos_y + 30);
-
-    }
-}
 function drawCollectable(t_collectable) {
     //draw collectable
     if (!t_collectable.isFound) {
@@ -335,8 +323,6 @@ function startGame() {
     isPlummeting = false;
     isFalling = false;
     //Tree Positions
-    trees_x = [-1100, -800, -200, -300, 300, 500, 900, 1300, 1700, 2100];
-    treePos_y = floorPos_y - 150
     //camera
     cameraPosX = 0;
     //Canyon objects
