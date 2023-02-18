@@ -12,8 +12,6 @@ var isMenu;
 //variable for the scenery
 var trees_x;
 var treePos_y;
-var cloud;
-var mountain;
 var stars;
 //Camera
 var cameraPosX;
