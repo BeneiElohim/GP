@@ -62,7 +62,7 @@ function draw() {
     mountains = new Mountain(color(54,35,18,220),color(270));
     mountains.drawMountain();
     //Declaring a new tree object and drawing it
-    trees = new Tree(floorPos_y);
+    trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);
     trees.drawTree();
     //Declaring a new cloud object and drawing it
     clouds = new Cloud();
@@ -191,7 +191,7 @@ function draw() {
     }
     //Welcome Screen
     if (isMenu && lives == 3) {
-         welcomeScreen = new Welcome(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150);
+        welcomeScreen = new MenuBox(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
         welcomeScreen.drawMenu();
         //Character Shape
         menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), gameChar_x, gameChar_y, 20);

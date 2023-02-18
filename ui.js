@@ -1,5 +1,5 @@
 //Declaring a constructor function for Welcome Menu
-function Welcome(width, height, textPx, color,textColor,font,xPos,yPos) {
+function MenuBox(width, height, textPx, color,textColor,font,xPos,yPos,text1 = "",text2 = "",text3 = "",text4= "") {
     this.width = width; //width of the menu
     this.height = height; //height of the menu
     this.textPx = textPx; //size of the text
@@ -8,6 +8,10 @@ function Welcome(width, height, textPx, color,textColor,font,xPos,yPos) {
     this.font = font; //font of the text
     this.xPos = xPos; //x position of the menu
     this.yPos = yPos; //y position of the menu
+    this.text1 = text1; //text1
+    this.text2 = text2; //text2
+    this.text3 = text3; //text3
+    this.text4 = text4; //text4
 
     this.drawMenu = function() {
         //Menu Box
@@ -17,11 +21,11 @@ function Welcome(width, height, textPx, color,textColor,font,xPos,yPos) {
         fill(this.textColor);
         textSize(this.textPx);
         textFont(this.font);
-        text("Welcome to the adventures of Roger Grubbie Blubb!", 18 + width/2, 100+height/2);
-        text("Use WASD to walk around.", 110 + width / 2, 120 + height / 2);
-        text("Click to skip this.", 110 + width / 2, 160 + height / 2);
-        textSize(this.textSize * 0.6);
-        text("P.S: You can call it RGB Boy! :)", width/2, 220+height/2);
+        text(this.text1, 18 + width/2, 100+height/2);
+        text(this.text2, 110 + width / 2, 120 + height / 2);
+        text(this.text3, 110 + width / 2, 160 + height / 2);
+        textSize(this.textPx * 0.6);
+        text(this.text4, width/2, 220+height/2);
 
     }
 }
