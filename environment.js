@@ -20,15 +20,67 @@ function Mountain(bcolor, tcolor) {
 }
 
 function Cloud() {
+
+  var clouds =
+  [{ x_pos: -300, y_pos: 150, size: 50 },
+  { x_pos: -100, y_pos: 150, size: 50 },
+  { x_pos: 200, y_pos: 150, size: 50 },
+  { x_pos: 400, y_pos: 100, size: 50 },
+  { x_pos: 600, y_pos: 150, size: 50 },
+  { x_pos: 800, y_pos: 100, size: 50 },
+  { x_pos: 1000, y_pos: 150, size: 50 },
+  { x_pos: 1200, y_pos: 100, size: 50 },
+  { x_pos: 1400, y_pos: 150, size: 50 },
+  { x_pos: 1600, y_pos: 100, size: 50 },
+  { x_pos: 1800, y_pos: 150, size: 50 },
+  { x_pos: -500, y_pos: 100, size: 50 },
+  { x_pos: -700, y_pos: 150, size: 50 },
+  { x_pos: -900, y_pos: 100, size: 50 },
+  ] // array of cloud objects, with xpos and ypos values
+
+  this.drawCloud = function() {
+    for (var i = 0; i<clouds.length; i++) {
+      fill(255, 255, 255, 170);
+      ellipse(clouds[i].x_pos - 39, clouds[i].y_pos + 4, clouds[i].size);
+      fill(255, 255, 255, 160);
+      ellipse(clouds[i].x_pos - 25, clouds[i].y_pos - 30, clouds[i].size - 10);
+      fill(255, 255, 255, 150);
+      ellipse(clouds[i].x_pos, clouds[i].y_pos + 4, clouds[i].size + 10);
+      fill(255, 255, 255, 160);
+      ellipse(clouds[i].x_pos, clouds[i].y_pos - 30, clouds[i].size - 5);
+  }
+}
 }
 
 
-function Star() {
-  console.log("star");
+function Star(glistening) {
+    this.glistening = glistening; // size of the star
+  var stars = [{ x_pos: -50, y_pos: 60 }
+    , { x_pos: 0, y_pos: 50 }
+    , { x_pos: 100, y_pos: 60 }
+    , { x_pos: 200, y_pos: 60 }
+    , { x_pos: 300, y_pos: 20 }
+    , { x_pos: 400, y_pos: 70 }
+    , { x_pos: 500, y_pos: 40 }
+    , { x_pos: 600, y_pos: 70 }
+    , { x_pos: 700, y_pos: 30 }
+    , { x_pos: 800, y_pos: 60 }
+    , { x_pos: 900, y_pos: 50 }
+    , { x_pos: 1000, y_pos: 40 }
+    , { x_pos: 1100, y_pos: 70 }
+    , { x_pos: 1200, y_pos: 30 }
+    , { x_pos: 1300, y_pos: 60 }
+    , { x_pos: 1400, y_pos: 50 }
+    , { x_pos: 1500, y_pos: 40 }] // array of star objects, with xpos and ypos values
+
+    this.drawStar = function() {
+    for (var i = 0; i < stars.length; i++) {
+      fill(255);
+      ellipse(stars[i].x_pos, stars[i].y_pos, random(0,this.glistening));
+    }
+  }
 }
 
 function Tree() {
     console.log("tree");
 }
-
-// var mountains = new Mountain(400, 432, "#8B4513", "#FFD700");

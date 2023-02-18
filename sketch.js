@@ -65,9 +65,12 @@ function draw() {
     //Tree drawing function
     drawTrees();
     //Cloud drawing function
-    drawClouds();
-    //Stars drawing function
-    drawStars();
+    clouds = new Cloud();
+    clouds.drawCloud();
+    //drawClouds();
+    //New Star object and drawing it
+    stars = new Star(6);
+    stars.drawStar();
     //the game character
     if (isLeft && isFalling) {
         // add your jumping-left code
@@ -278,14 +281,6 @@ function drawTrees() {
 
     }
 }
-function drawStars() {
-    //For loop to traverse the array of stars
-    for (var s = 0; s < stars.length; s++) {
-        var glistening = random(0, 6);
-        fill(255, 255, 255);
-        ellipse(stars[s].x_pos, stars[s].y_pos, glistening);
-    }
-}
 function drawCollectable(t_collectable) {
     //draw collectable
     if (!t_collectable.isFound) {
@@ -381,24 +376,6 @@ function startGame() {
         ]
     //camera
     cameraPosX = 0;
-    //stars for the background
-    stars = [{ x_pos: -50, y_pos: 60 }
-        , { x_pos: 0, y_pos: 50 }
-        , { x_pos: 100, y_pos: 60 }
-        , { x_pos: 200, y_pos: 60 }
-        , { x_pos: 300, y_pos: 20 }
-        , { x_pos: 400, y_pos: 70 }
-        , { x_pos: 500, y_pos: 40 }
-        , { x_pos: 600, y_pos: 70 }
-        , { x_pos: 700, y_pos: 30 }
-        , { x_pos: 800, y_pos: 60 }
-        , { x_pos: 900, y_pos: 50 }
-        , { x_pos: 1000, y_pos: 40 }
-        , { x_pos: 1100, y_pos: 70 }
-        , { x_pos: 1200, y_pos: 30 }
-        , { x_pos: 1300, y_pos: 60 }
-        , { x_pos: 1400, y_pos: 50 }
-        , { x_pos: 1500, y_pos: 40 }]
     //Canyon objects
     canyons = [
         { x_pos: 98, y_pos: 400, width: 60 },
