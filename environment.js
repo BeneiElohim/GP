@@ -18,7 +18,6 @@ function Mountain(bcolor, tcolor) {
     }
   }
 }
-
 function Cloud() {
 
   var clouds =
@@ -51,8 +50,6 @@ function Cloud() {
   }
 }
 }
-
-
 function Star(glistening) {
     this.glistening = glistening; // size of the star
   var stars = [{ x_pos: -50, y_pos: 60 }
@@ -80,7 +77,16 @@ function Star(glistening) {
     }
   }
 }
-
-function Tree() {
-    console.log("tree");
+function Tree(floor) {
+  this.floor = floor; // y position of the tree
+  trees_x = [-1100, -800, -200, -300, 300, 500, 900, 1300, 1700, 2100];
+  trees_y = floor-150;
+  this.drawTree= function() {
+    for (var i = 0; i < trees_x.length; i++) {
+    fill(90, 40, 19);
+    rect(trees_x[i], treePos_y + 19, 50, 130);
+    fill(0, 101, 0);
+    triangle(trees_x[i] - 50, treePos_y + 30, trees_x[i] + 30, treePos_y - 136, trees_x[i] + 100, treePos_y + 30);
+    }
+  }
 }

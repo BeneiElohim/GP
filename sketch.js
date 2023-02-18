@@ -60,8 +60,10 @@ function draw() {
     //Declaring a new mountain object and drawing it
     mountains = new Mountain(color(54,35,18,220),color(270));
     mountains.drawMountain();
-    //Tree drawing function
-    drawTrees();
+    //Declaring a new tree object and drawing it
+    trees = new Tree(floorPos_y);
+    trees.drawTree();
+
     //Declaring a new cloud object and drawing it
     clouds = new Cloud();
     clouds.drawCloud();
