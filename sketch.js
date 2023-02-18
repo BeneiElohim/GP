@@ -59,8 +59,7 @@ function draw() {
     rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
     push();
     translate(-cameraPosX, 0)
-    //draw mountains with function
-    //drawMountains();
+    //Declaring a new mountain object and drawing it
     mountains = new Mountain(color(54,35,18,220),color(270));
     mountains.drawMountain();
     //Tree drawing function
@@ -269,15 +268,6 @@ function drawClouds() {
         ellipse(cloud[j].x_pos, cloud[j].y_pos - 30, cloud[j].size - 5);
     }
 }
-function drawMountains() {
-    // for loop to traverse the array of mountains
-    for (var k = 0; k < mountain.length; k++) {
-        fill(54, 35, 18, 220);
-        triangle(mountain[k].x_pos, mountain[k].y_pos, mountain[k].x_pos + 300, mountain[k].y_pos, mountain[k].x_pos + 150, mountain[k].y_pos - 300);
-        fill(270, 270, 270);
-        quad(mountain[k].x_pos + 150, mountain[k].y_pos - 300, mountain[k].x_pos + 110, mountain[k].y_pos - 220, mountain[k].x_pos + 150, mountain[k].y_pos - 210, mountain[k].x_pos + 180, mountain[k].y_pos - 240);
-    }
-}
 function drawTrees() {
     // For loop to traverse the array of trees_x
     for (var i = 0; i < trees_x.length; i++) {
@@ -372,14 +362,6 @@ function startGame() {
     //Tree Positions
     trees_x = [-1100, -800, -200, -300, 300, 500, 900, 1300, 1700, 2100];
     treePos_y = floorPos_y - 150
-    //Mountain Positions
-   /* mountain = [
-        { x_pos: 400, y_pos: 432 },
-        { x_pos: 800, y_pos: 432 },
-        { x_pos: 1300, y_pos: 432 },
-        { x_pos: 2100, y_pos: 432 },
-        { x_pos: -400, y_pos: 432 }
-    ] */
     //Cloud Positions
     cloud =
         [{ x_pos: -300, y_pos: 150, size: 50 },
