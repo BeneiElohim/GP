@@ -64,7 +64,7 @@ function draw() {
     mountains.drawMountain();
     //Tree drawing function
     drawTrees();
-    //Cloud drawing function
+    //Declaring a new cloud object and drawing it
     clouds = new Cloud();
     clouds.drawCloud();
     //drawClouds();
@@ -357,23 +357,6 @@ function startGame() {
     //Tree Positions
     trees_x = [-1100, -800, -200, -300, 300, 500, 900, 1300, 1700, 2100];
     treePos_y = floorPos_y - 150
-    //Cloud Positions
-    cloud =
-        [{ x_pos: -300, y_pos: 150, size: 50 },
-        { x_pos: -100, y_pos: 150, size: 50 },
-        { x_pos: 200, y_pos: 150, size: 50 },
-        { x_pos: 400, y_pos: 100, size: 50 },
-        { x_pos: 600, y_pos: 150, size: 50 },
-        { x_pos: 800, y_pos: 100, size: 50 },
-        { x_pos: 1000, y_pos: 150, size: 50 },
-        { x_pos: 1200, y_pos: 100, size: 50 },
-        { x_pos: 1400, y_pos: 150, size: 50 },
-        { x_pos: 1600, y_pos: 100, size: 50 },
-        { x_pos: 1800, y_pos: 150, size: 50 },
-        { x_pos: -500, y_pos: 100, size: 50 },
-        { x_pos: -700, y_pos: 150, size: 50 },
-        { x_pos: -900, y_pos: 100, size: 50 },
-        ]
     //camera
     cameraPosX = 0;
     //Canyon objects
