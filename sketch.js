@@ -36,6 +36,7 @@ var platforms;
 //enemies
 //menues
 var welcomeScreen;
+var mountains;
 function preload() {
     soundFormats('mp3', 'ogg');
     myFont = loadFont("assets/kozmin.otf");
@@ -59,7 +60,9 @@ function draw() {
     push();
     translate(-cameraPosX, 0)
     //draw mountains with function
-    drawMountains();
+    //drawMountains();
+    mountains = new Mountain(color(54,35,18,220),color(270));
+    mountains.drawMountain();
     //Tree drawing function
     drawTrees();
     //Cloud drawing function
@@ -190,20 +193,6 @@ function draw() {
     if (isMenu && lives == 3) {
          welcomeScreen = new Welcome(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150);
         welcomeScreen.drawMenu();
-        /*var menuWidth = 500;
-        var menuHeight = 150;
-        //Menu box
-        fill(0, 0, 0, menuFade);
-        rect(250, 150, menuWidth, menuHeight);
-        //Menu text
-        fill(255, 255, 255, menuFade);
-        textSize(20);
-        textFont(myFont);
-        text("Welcome to the adventures of Roger Grubbie Blubb!", 18 + menuWidth / 2, 100 + menuHeight / 2);
-        text("Use WASD to walk around.", 110 + menuWidth / 2, 120 + menuHeight / 2);
-        text("Click to skip this.", 110 + menuWidth / 2, 160 + menuHeight / 2);
-        textSize(12);
-        text("P.S You can call it RGB Boy! :)", +menuWidth / 2, 220 + menuHeight / 2); */
         //Character Shape
         fill(200, 0, 10, menuFade)
         ellipse(gameChar_x + 150, gameChar_y - 220, 20, 20);
@@ -384,13 +373,13 @@ function startGame() {
     trees_x = [-1100, -800, -200, -300, 300, 500, 900, 1300, 1700, 2100];
     treePos_y = floorPos_y - 150
     //Mountain Positions
-    mountain = [
+   /* mountain = [
         { x_pos: 400, y_pos: 432 },
         { x_pos: 800, y_pos: 432 },
         { x_pos: 1300, y_pos: 432 },
         { x_pos: 2100, y_pos: 432 },
         { x_pos: -400, y_pos: 432 }
-    ]
+    ] */
     //Cloud Positions
     cloud =
         [{ x_pos: -300, y_pos: 150, size: 50 },
