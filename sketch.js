@@ -67,7 +67,6 @@ function draw() {
     //Declaring a new cloud object and drawing it
     clouds = new Cloud();
     clouds.drawCloud();
-    //drawClouds();
     //New Star object and drawing it
     stars = new Star(6);
     stars.drawStar();
@@ -147,8 +146,6 @@ function draw() {
     for (var i = 0; i < platforms.length; i++) {
         platforms[i].draw();
     }
-
-
     renderFlagpole();
     if (!flagpole.isReached) {
         checkFlagpole();
@@ -257,19 +254,6 @@ function keyReleased() {
 function mousePressed() {
     //if mouse is pressed, the menu will disappear
     isMenu = false;
-}
-function drawClouds() {
-    // For loop to traverse the array of clouds
-    for (var j = 0; j < cloud.length; j++) {
-        fill(255, 255, 255, 170);
-        ellipse(cloud[j].x_pos - 39, cloud[j].y_pos + 4, cloud[j].size);
-        fill(255, 255, 255, 160);
-        ellipse(cloud[j].x_pos - 25, cloud[j].y_pos - 30, cloud[j].size - 10);
-        fill(255, 255, 255, 150);
-        ellipse(cloud[j].x_pos, cloud[j].y_pos + 4, cloud[j].size + 10);
-        fill(255, 255, 255, 160);
-        ellipse(cloud[j].x_pos, cloud[j].y_pos - 30, cloud[j].size - 5);
-    }
 }
 function drawTrees() {
     // For loop to traverse the array of trees_x
