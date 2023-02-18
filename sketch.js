@@ -27,6 +27,7 @@ var collectables;
 var canyons;
 //Menu fade code to control menu fade in/out
 var menuFade = 255;
+var menuMascot;
 //Life Shapes for the players remaining lives
 var lifeShape;
 //platforms
@@ -63,7 +64,6 @@ function draw() {
     //Declaring a new tree object and drawing it
     trees = new Tree(floorPos_y);
     trees.drawTree();
-
     //Declaring a new cloud object and drawing it
     clouds = new Cloud();
     clouds.drawCloud();
@@ -157,6 +157,7 @@ function draw() {
         if (isContact && lives > 0) {
             startGame();
             console.log("contact");
+            lives--;
             break;
         }
     }
@@ -193,13 +194,8 @@ function draw() {
          welcomeScreen = new Welcome(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150);
         welcomeScreen.drawMenu();
         //Character Shape
-        fill(200, 0, 10, menuFade)
-        ellipse(gameChar_x + 150, gameChar_y - 220, 20, 20);
-        fill(38, 104, 0, menuFade);
-        rect(gameChar_x + 140, gameChar_y - 210, 20, 50);
-        fill(60, 105, 225, menuFade);
-        rect(gameChar_x + 140, gameChar_y - 160, 8, 10);
-        rect(gameChar_x + 152, gameChar_y - 160, 8, 10);
+        menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), gameChar_x, gameChar_y, 20);
+        menuMascot.drawMascot();
     }
     //walking left
     if (isLeft == true) {

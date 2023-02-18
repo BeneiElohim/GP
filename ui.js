@@ -25,3 +25,28 @@ function Welcome(width, height, textPx, color,textColor,font,xPos,yPos) {
 
     }
 }
+function Lives(liveCount,){
+
+
+
+}
+function Mascot(headColor, bodyColor, legColor,gcX,gcY, size) {
+    this.headColor = headColor;
+    this.bodyColor = bodyColor;
+    this.legColor = legColor;
+    this.gcX = gcX;
+    this.gcY = gcY;
+    this.size = size;
+
+    this.drawMascot = function() {
+        fill(this.headColor);
+        ellipse(this.gcX+150, this.gcY-220, this.size);
+        fill(this.bodyColor);
+        rect(this.gcX + 140, this.gcY-210, this.size, this.size*2.5);
+        fill(this.legColor);
+        rect(this.gcX + 140, this.gcY -160, this.size * 0.4, this.size / 2);
+        rect(this.gcX + 152, this.gcY -160, this.size * 0.4, this.size / 2);
+    }
+
+
+}
