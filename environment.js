@@ -2,13 +2,11 @@
 function Mountain(bcolor, tcolor) {
   this.bcolor = bcolor; // bottom color of the mountain
   this.tcolor = tcolor; // top color of the mountain, peak color
-
   var mountains = [{ x_pos: 400, y_pos: 432 },
     { x_pos: 800, y_pos: 432 },
     { x_pos: 1300, y_pos: 432 },
     { x_pos: 2100, y_pos: 432 },
     { x_pos: -400, y_pos: 432 }]; // array of mountain objects, with xpos and ypos values
-
   this.drawMountain = function() {
     for (var i = 0; i < mountains.length; i++) {
     fill(this.bcolor); // bottom color of the mountain
@@ -35,7 +33,6 @@ function Cloud() {
   { x_pos: -700, y_pos: 150, size: 50 },
   { x_pos: -900, y_pos: 100, size: 50 },
   ] // array of cloud objects, with xpos and ypos values
-
   this.drawCloud = function() {
     for (var i = 0; i<clouds.length; i++) {
       fill(255, 255, 255, 170);
@@ -68,7 +65,6 @@ function Star(glistening) {
     , { x_pos: 1300, y_pos: 60 }
     , { x_pos: 1400, y_pos: 50 }
     , { x_pos: 1500, y_pos: 40 }] // array of star objects, with xpos and ypos values
-
     this.drawStar = function() {
     for (var i = 0; i < stars.length; i++) {
       fill(255);
