@@ -1,13 +1,13 @@
 function keyPressed() {
     /*If statements to control the characters movement. Should be disable during plummet & log-in menu */
-    if (!isPlummeting && (!isMenu || lives != 3) ) {
+    if (!p.isPlummeting && (!isMenu || lives != 3) ) {
         if (keyCode == 65) {
-            isLeft = true;
+            p.isLeft = true;
         }
         if (keyCode == 68) {
-            isRight = true;
+            p.isRight = true;
         }
-        if (keyCode == 87 && !isFalling && !isPlummeting) {
+        if (keyCode == 87 && !p.isFalling && !p.isPlummeting) {
             p.yPos = p.yPos - 300;
         }
     }
@@ -16,10 +16,10 @@ function keyReleased() {
     // if statements to control the animation of the character when
     // keys are released.
     if (keyCode == 65) {
-        isLeft = false;
+        p.isLeft = false;
     }
     if (keyCode == 68) {
-        isRight = false;
+        p.isRight = false;
     }
 }
 function mousePressed() {

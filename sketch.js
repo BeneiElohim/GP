@@ -3,10 +3,6 @@ var p;
 //Game Character Positions
 var floorPos_y;
 //Bools for controling the animation of the character.
-var isLeft;
-var isRight;
-var isPlummeting;
-var isFalling;
 //Bool for the welcome menu
 var isMenu;
 //variable for the scenery
@@ -67,20 +63,20 @@ function draw() {
     //New Star object and drawing it
     stars.drawStar();
     //the game character
-    if (isLeft && isFalling) {
+    if (p.isLeft && p.isFalling) {
         p.jumpingLeft();
     }
-    else if (isRight && isFalling) {
+    else if (p.isRight && p.isFalling) {
         p.jumpingRight();
     }
 
-    else if (isLeft) {
+    else if (p.isLeft) {
         p.walkingLeft();
     }
-    else if (isRight) {
+    else if (p.isRight) {
         p.walkingRight();
     }
-    else if (isFalling || isPlummeting) {
+    else if (p.isFalling || p.isPlummeting) {
         p.jumpingForward();
     }
     else {
@@ -154,27 +150,27 @@ function draw() {
         menuMascot.drawMascot();
     }
     //walking left
-    if (isLeft == true) {
+    if (p.isLeft == true) {
         p.xPos -= 2;
     }
     //walking right
-    if (isRight == true) {
+    if (p.isRight == true) {
         p.xPos += 2;
     }
     if (p.yPos < floorPos_y) {
         for (var i = 0; i < platforms.length; i++) {
             if (platforms[i].checkContact(p.xPos, p.yPos) == true) {
-                isFalling = false;
+                p.isFalling = false;
                 break;
             }
         p.yPos += 2;
-        isFalling = true;
+        p.isFalling = true;
     }
 }
     if (p.yPos >= floorPos_y) {
-        isFalling = false;
+        p.isFalling = false;
     }
-    if (isPlummeting == true) {
+    if (p.isPlummeting == true) {
         p.yPos += 3;
     }
 }
@@ -189,10 +185,6 @@ function startGame() {
     p.xPos = width / 2;
     p.yPos = floorPos_y;
     //Bools for Interaction
-    isLeft = false;
-    isRight = false;
-    isPlummeting = false;
-    isFalling = false;
     //Tree Positions
     //camera
     cameraPosX = 0;

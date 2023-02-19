@@ -60,6 +60,7 @@ var player = {
         rect(this.yPos + 2, this.yPos - 40, 8, 10);
     },
     standing: function() {
+        console.log("standing");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
