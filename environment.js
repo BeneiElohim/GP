@@ -19,7 +19,6 @@ function Mountain(bcolor, tcolor) {
   }
 }
 function Cloud() {
-
   var clouds =
   [{ x_pos: -300, y_pos: 150, size: 50 },
   { x_pos: -100, y_pos: 150, size: 50 },
