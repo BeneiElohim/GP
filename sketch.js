@@ -1,3 +1,5 @@
+//creating global player object variable
+var p;
 //Game Character Positions
 var gameChar_x;
 var gameChar_y;
@@ -48,7 +50,7 @@ function setup() {
 }
 function draw() {
     //Positioning the camera to the center of the character
-    cameraPosX = gameChar_x - width / 2;
+    cameraPosX = p.xPos - width / 2;
     ///////////DRAWING CODE//////////
     background(30, 30, 30); //fill the black background
     noStroke();
@@ -68,64 +70,23 @@ function draw() {
     stars.drawStar();
     //the game character
     if (isLeft && isFalling) {
-        // add your jumping-left code
-        fill(200, 0, 10)
-        ellipse(gameChar_x, gameChar_y - 70, 20, 20);
-        fill(38, 104, 0);
-        rect(gameChar_x - 10, gameChar_y - 60, 20, 30);
-        fill(60, 105, 225);
-        rect(gameChar_x - 16, gameChar_y - 40, 8, 10);
-        rect(gameChar_x - 2, gameChar_y - 40, 8, 10);
+        p.jumpingLeft();
     }
     else if (isRight && isFalling) {
-        // add your jumping-right code
-        fill(200, 0, 10)
-        ellipse(gameChar_x, gameChar_y - 70, 20, 20);
-        fill(38, 104, 0);
-        rect(gameChar_x - 10, gameChar_y - 60, 20, 30);
-        fill(60, 105, 225);
-        rect(gameChar_x - 4, gameChar_y - 40, 8, 10);
-        rect(gameChar_x + 10, gameChar_y - 40, 8, 10);
+        p.jumpingRight();
     }
+
     else if (isLeft) {
-        // add your walking left code
-        fill(200, 0, 10)
-        ellipse(gameChar_x, gameChar_y - 70, 20, 20);
-        fill(38, 104, 0);
-        rect(gameChar_x - 10, gameChar_y - 60, 20, 50);
-        fill(60, 105, 225);
-        rect(gameChar_x - 16, gameChar_y - 10, 8, 10);
-        rect(gameChar_x - 2, gameChar_y - 10, 8, 10);
+        p.walkingLeft();
     }
     else if (isRight) {
-        // add your walking right code
-        fill(200, 0, 10)
-        ellipse(gameChar_x, gameChar_y - 70, 20, 20);
-        fill(38, 104, 0);
-        rect(gameChar_x - 10, gameChar_y - 60, 20, 50);
-        fill(60, 105, 225);
-        rect(gameChar_x - 4, gameChar_y - 10, 8, 10);
-        rect(gameChar_x + 10, gameChar_y - 10, 8, 10);
+        p.walkingRight();
     }
     else if (isFalling || isPlummeting) {
-        // add your jumping facing forwards code
-        fill(200, 0, 10)
-        ellipse(gameChar_x, gameChar_y - 70, 20, 20);
-        fill(38, 104, 0);
-        rect(gameChar_x - 10, gameChar_y - 60, 20, 30);
-        fill(60, 105, 225);
-        rect(gameChar_x - 10, gameChar_y - 30, 8, 10);
-        rect(gameChar_x + 2, gameChar_y - 40, 8, 10);
+        p.jumpingForward();
     }
     else {
-        //  standing front facing code
-        fill(200, 0, 10)
-        ellipse(gameChar_x, gameChar_y - 70, 20, 20);
-        fill(38, 104, 0);
-        rect(gameChar_x - 10, gameChar_y - 60, 20, 50);
-        fill(60, 105, 225);
-        rect(gameChar_x - 10, gameChar_y - 10, 8, 10);
-        rect(gameChar_x + 2, gameChar_y - 10, 8, 10);
+        p.standing();
     }
     for (var i = 0; i < collectables.length; i++) {
         //check if game character is too close to the collectable
@@ -149,7 +110,7 @@ function draw() {
     checkPlayerDie();
     for (var i = 0; i < enemies.length; i++) {
         enemies[i].draw();
-        var isContact = enemies[i].checkContact(gameChar_x, gameChar_y);
+        var isContact = enemies[i].checkContact(p.xPos, p.yPos);
         if (isContact && lives > 0) {
             startGame();
             console.log("contact");
@@ -191,108 +152,44 @@ function draw() {
         welcomeScreen = new MenuBox(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
         welcomeScreen.drawMenu();
         //Character Shape
-        menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), gameChar_x, gameChar_y, 20);
+        menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), p.xPos, p.yPos, 20);
         menuMascot.drawMascot();
     }
     //walking left
     if (isLeft == true) {
-        gameChar_x -= 2;
+        p.xPos -= 2;
     }
     //walking right
     if (isRight == true) {
-        gameChar_x += 2;
+        p.xPos += 2;
     }
-    if (gameChar_y < floorPos_y) {
+    if (p.yPos < floorPos_y) {
         for (var i = 0; i < platforms.length; i++) {
-            if (platforms[i].checkContact(gameChar_x, gameChar_y) == true) {
+            if (platforms[i].checkContact(p.xPos, p.yPos) == true) {
                 isFalling = false;
                 break;
             }
-        gameChar_y += 2;
+        p.yPos += 2;
         isFalling = true;
     }
 }
-    if (gameChar_y >= floorPos_y) {
+    if (p.yPos >= floorPos_y) {
         isFalling = false;
     }
     if (isPlummeting == true) {
-        gameChar_y += 3;
+        p.yPos += 3;
     }
-
-}
-function drawCollectable(t_collectable) {
-    //draw collectable
-    if (!t_collectable.isFound) {
-        noStroke();
-        fill(204, 55, 51);
-        circle(t_collectable.x_pos + 6, t_collectable.y_pos + 10, t_collectable.size + 10);
-        fill(0, 110, 0);
-        ellipse(t_collectable.x_pos - 10, t_collectable.y_pos - 15, 10, t_collectable.size - 10);
-        strokeWeight(5);
-        stroke(41, 0, 0);
-        line(t_collectable.x_pos + 6, t_collectable.y_pos, t_collectable.x_pos + 7, t_collectable.y_pos - 20);
-    }
-}
-function drawCanyon(t_canyon) {
-    //draw canyon
-    fill(56, 0, 0);
-    rect(t_canyon.x_pos, floorPos_y, t_canyon.width + 30, 300);
-    fill(94, 0, 0, 110);
-    rect(t_canyon.x_pos, floorPos_y, t_canyon.width + 20, 300);
-}
-function checkCollectable(t_collectable) {
-    //check if collectable is found
-    var d = dist(gameChar_x, gameChar_y, t_collectable.x_pos, t_collectable.y_pos);
-    if (d < 50) {
-        t_collectable.isFound = true;
-        game_score += 1;
-    }
-}
-function checkCanyon(t_canyon) {
-    //check if character is over a canyon
-    if (gameChar_x > t_canyon.x_pos && gameChar_x < t_canyon.x_pos + t_canyon.width && gameChar_y >= floorPos_y) {
-        isPlummeting = true;
-    }
-}
-function renderFlagpole() {
-    push();
-    strokeWeight(5);
-    stroke(100);
-    line(flagpole.x_pos, floorPos_y, flagpole.x_pos, floorPos_y - 250);
-    noStroke();
-    fill(255, 0, 0);
-    if (flagpole.isReached) {
-        rect(flagpole.x_pos, floorPos_y - 250, 50, 50);
-    }
-    else {
-        rect(flagpole.x_pos, floorPos_y - 50, 50, 50);
-    }
-    pop();
-}
-function checkFlagpole() {
-    var d = abs(gameChar_x - flagpole.x_pos);
-    if (d < 15) {
-        flagpole.isReached = true;
-    }
-}
-function checkPlayerDie() {
-    if (gameChar_y > height) {
-        --lives;
-        if (lives > 0) {
-            startGame();
-        }
-    }
-
 }
 function startGame() {
     stars = new Star(6); //Creating a new star object
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     // MenuBox for the Score and Lives counter
-    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ lives, 'Score ' + game_score);    
+    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ lives, 'Score ' + game_score);
+    p = player;  
     //Character Positions
-    gameChar_x = width / 2;
-    gameChar_y = floorPos_y;
+    p.xPos = width / 2;
+    p.yPos = floorPos_y;
     //Bools for Interaction
     isLeft = false;
     isRight = false;

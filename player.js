@@ -8,4 +8,64 @@ var player = {
     isFalling: false,
     isPlummeting: false,
 
-};
+    walkingLeft: function() {
+        console.log("walking left");
+        fill(200, 0, 10)
+        ellipse(this.xPos, this.yPos - 70, 20, 20);
+        fill(38, 104, 0);
+        rect(this.xPos - 10, this.yPos - 60, 20, 50);
+        fill(60, 105, 225);
+        rect(this.xPos - 16,this.yPos - 10, 8, 10);
+        rect(this.xPos - 2, this.yPos - 10, 8, 10);
+    },
+    walkingRight: function() {
+        console.log("walking right");
+        fill(200, 0, 10)
+        ellipse(this.xPos, this.yPos - 70, 20, 20);
+        fill(38, 104, 0);
+        rect(this.xPos - 10, this.yPos - 60, 20, 50);
+        fill(60, 105, 225);
+        rect(this.xPos - 4, this.yPos - 10, 8, 10);
+        rect(this.xPos + 10, this.yPos - 10, 8, 10);
+    },
+    jumpingLeft: function() {
+        console.log("jumping left");
+        fill(200, 0, 10)
+        ellipse(this.xPos, this.yPos - 70, 20, 20);
+        fill(38, 104, 0);
+        rect(this.xPos - 10, this.yPos - 60, 20, 30);
+        fill(60, 105, 225);
+        rect(this.xPos - 16, this.yPos - 40, 8, 10);
+        rect(this.xPos - 2, this.yPos - 40, 8, 10);
+
+    },
+    jumpingRight: function() {
+        console.log("jumping right");
+        fill(200, 0, 10)
+        ellipse(this.xPos, this.yPos - 70, 20, 20);
+        fill(38, 104, 0);
+        rect(this.xPos - 10, this.yPos - 60, 20, 30);
+        fill(60, 105, 225);
+        rect(this.xPos - 4, this.yPos - 40, 8, 10);
+        rect(this.xPos + 10, this.yPos - 40, 8, 10);    
+    },
+    jumpingForward: function() {
+        console.log("jumping forward");
+        fill(200, 0, 10)
+        ellipse(this.yPos, this.yPos - 70, 20, 20);
+        fill(38, 104, 0);
+        rect(this.yPos - 10, this.yPos - 60, 20, 30);
+        fill(60, 105, 225);
+        rect(this.yPos - 10, this.yPos - 30, 8, 10);
+        rect(this.yPos + 2, this.yPos - 40, 8, 10);
+    },
+    standing: function() {
+        fill(200, 0, 10)
+        ellipse(this.xPos, this.yPos - 70, 20, 20);
+        fill(38, 104, 0);
+        rect(this.xPos - 10, this.yPos - 60, 20, 50);
+        fill(60, 105, 225);
+        rect(this.xPos - 10, this.yPos - 10, 8, 10);
+        rect(this.xPos + 2, this.yPos - 10, 8, 10);        
+    }
+}

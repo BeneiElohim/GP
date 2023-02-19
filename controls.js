@@ -8,7 +8,7 @@ function keyPressed() {
             isRight = true;
         }
         if (keyCode == 87 && !isFalling && !isPlummeting) {
-            gameChar_y = gameChar_y - 300;
+            p.yPos = p.yPos - 300;
         }
     }
 }
