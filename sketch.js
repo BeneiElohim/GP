@@ -42,8 +42,8 @@ function preload() {
 function setup() {
     //background
     createCanvas(1024, 576);
-    floorPos_y = height * 3 / 4;
     lives = 3;
+    floorPos_y = height * 3 / 4;
     startGame();
 }
 function draw() {
@@ -63,10 +63,8 @@ function draw() {
     trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);
     trees.drawTree();
     //Declaring a new cloud object and drawing it
-    clouds = new Cloud();
     clouds.drawCloud();
     //New Star object and drawing it
-    stars = new Star(6);
     stars.drawStar();
     //the game character
     if (isLeft && isFalling) {
@@ -161,12 +159,13 @@ function draw() {
     }
     pop();
     //Score drawing function
+    statCounter.drawMenu();
     fill(255, 255, 255);
     noStroke();
     text("Score: " + game_score, 20, 20);
-    for (var i = 0; i < lives; i++) {
+/*     for (var i = 0; i < lives; i++) {
         drawLife(lives);
-    }
+    } */
     if (lives < 1) {
         fill(255, 255, 255);
         textSize(20);
@@ -220,34 +219,6 @@ function draw() {
         gameChar_y += 3;
     }
 
-}
-function keyPressed() {
-    /*If statements to control the characters movement. Should be disable during plummet & log-in menu */
-    if (!isPlummeting && (!isMenu || lives != 3) ) {
-        if (keyCode == 65) {
-            isLeft = true;
-        }
-        if (keyCode == 68) {
-            isRight = true;
-        }
-        if (keyCode == 87 && !isFalling && !isPlummeting) {
-            gameChar_y = gameChar_y - 300;
-        }
-    }
-}
-function keyReleased() {
-    // if statements to control the animation of the character when
-    // keys are released.
-    if (keyCode == 65) {
-        isLeft = false;
-    }
-    if (keyCode == 68) {
-        isRight = false;
-    }
-}
-function mousePressed() {
-    //if mouse is pressed, the menu will disappear
-    isMenu = false;
 }
 function drawCollectable(t_collectable) {
     //draw collectable
@@ -314,6 +285,11 @@ function checkPlayerDie() {
 
 }
 function startGame() {
+    stars = new Star(6); //Creating a new star object
+    clouds = new Cloud(); //Creating a new cloud object
+    mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
+    // MenuBox for the Score and Lives counter
+    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ lives, 'Score ' + game_score);    
     //Character Positions
     gameChar_x = width / 2;
     gameChar_y = floorPos_y;
@@ -357,29 +333,7 @@ function startGame() {
     enemies.push(new Enemies(100, floorPos_y - 10, 100));
     //Game Score
     game_score = 0;
-    
     console.log("Game Started");
-}
-function drawLife() {
-    fill(255);
-    noStroke();
-    textSize(15);
-    text("Lives: " + lives, 20, 40);
-    if(lives >= 1){
-    //red circle
-    fill(255, 0, 0);
-    ellipse(82, 35, 10);
-    }
-    if(lives >= 2){
-    //green circle
-    fill(0, 255, 0);
-    ellipse(102, 35, 10);
-    }
-    if(lives >= 3){
-    //blue circle
-    fill(0, 0, 255);
-    ellipse(122, 35, 10);
-    }
 }
 function createPlatforms(x,y,length){
 

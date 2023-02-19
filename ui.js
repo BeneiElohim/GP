@@ -26,14 +26,52 @@ function MenuBox(width, height, textPx, color,textColor,font,xPos,yPos,text1 = "
         text(this.text3, 110 + width / 2, 160 + height / 2);
         textSize(this.textPx * 0.6);
         text(this.text4, width/2, 220+height/2);
-
     }
 }
-function Lives(liveCount,){
-
+function Lives(liveCount, xPos, yPos, textPx,size, colorText, colorLives1, colorLives2, colorLives3) {
+    this.liveCount = liveCount;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.textPx = textPx;
+    this.size = size;
+    this.colorText = colorText;
+    this.colorLives1 = colorLives1;
+    this.colorLives2 = colorLives2;
+    this.colorLives3 = colorLives3;
+    
+    this.drawLives = function(){
+        fill(this.colorText);
+        textSize(this.textPx);
+        text("Lives: " + this.liveCount, this.xPos, this.yPos);
+        if(this.liveCount >= 1){
+            fill(this.colorLives1);
+            ellipse(this.xPos + 62, this.yPos - 5, this.size);
+        }
+        if(this.liveCount >= 2){
+            fill(this.colorLives2);
+            ellipse(this.xPos + 82, this.yPos - 5, this.size);
+        }
+        if(this.liveCount >= 3){
+            fill(this.colorLives3);
+            ellipse(this.xPos + 102, this.yPos - 5, this.size);
+        }
+    }
+    this.takeLife = function(){
+        this.liveCount--;
+    }
+    this.endGame = function(){
+        if(this.liveCount <= 0){
+            fill(255, 255, 255);
+            textSize(20);
+            text("GAME OVER", 500, 300);
+            text("Press space to continue.", 500, 350);
+            return true;
+        }
+    }
 
 
 }
+
 function Mascot(headColor, bodyColor, legColor,gcX,gcY, size) {
     this.headColor = headColor;
     this.bodyColor = bodyColor;
@@ -51,6 +89,13 @@ function Mascot(headColor, bodyColor, legColor,gcX,gcY, size) {
         rect(this.gcX + 140, this.gcY -160, this.size * 0.4, this.size / 2);
         rect(this.gcX + 152, this.gcY -160, this.size * 0.4, this.size / 2);
     }
-
-
+}
+function Score(score){
+    this.score = score;
+    this.drawScore = function(){
+        fill(255);
+        textSize(20);
+        textFont("Arial");
+        text("Score: " + this.score, 20, 30);
+    }
 }
