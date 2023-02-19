@@ -20,7 +20,7 @@ function drawCanyon(t_canyon) {
 }
 function checkCollectable(t_collectable) {
     //check if collectable is found
-    var d = dist(gameChar_x, gameChar_y, t_collectable.x_pos, t_collectable.y_pos);
+    var d = dist(p.xPos, p.yPos, t_collectable.x_pos, t_collectable.y_pos);
     if (d < 50) {
         t_collectable.isFound = true;
         game_score += 1;
@@ -28,7 +28,7 @@ function checkCollectable(t_collectable) {
 }
 function checkCanyon(t_canyon) {
     //check if character is over a canyon
-    if (gameChar_x > t_canyon.x_pos && gameChar_x < t_canyon.x_pos + t_canyon.width && gameChar_y >= floorPos_y) {
+    if (p.xPos > t_canyon.x_pos && p.xPos < t_canyon.x_pos + t_canyon.width && p.yPos >= floorPos_y) {
         isPlummeting = true;
     }
 }
@@ -48,13 +48,13 @@ function renderFlagpole() {
     pop();
 }
 function checkFlagpole() {
-    var d = abs(gameChar_x - flagpole.x_pos);
+    var d = abs(p.xPos - flagpole.x_pos);
     if (d < 15) {
         flagpole.isReached = true;
     }
 }
 function checkPlayerDie() {
-    if (gameChar_y > height) {
+    if (p.yPos > height) {
         --lives;
         if (lives > 0) {
             startGame();

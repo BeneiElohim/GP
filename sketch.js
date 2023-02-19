@@ -1,8 +1,6 @@
 //creating global player object variable
 var p;
 //Game Character Positions
-var gameChar_x;
-var gameChar_y;
 var floorPos_y;
 //Bools for controling the animation of the character.
 var isLeft;
