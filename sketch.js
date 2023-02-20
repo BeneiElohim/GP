@@ -116,7 +116,7 @@ function draw() {
     statCounter.drawMenu();
     fill(255, 255, 255);
     noStroke();
-    text("Score: " + game_score, 20, 20);
+    text("Score: " + p.score, 20, 20);
 /*     for (var i = 0; i < lives; i++) {
         drawLife(lives);
     } */
@@ -174,15 +174,19 @@ function draw() {
     }
 }
 function startGame() {
+    p = player;
+    p.isFalling = false;
+    p.isPlummeting = false;
+    p.isLeft = false;
+    p.isRight = false;
+    //Character Positions
+    p.xPos = width / 2;
+    p.yPos = floorPos_y;
     stars = new Star(6); //Creating a new star object
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     // MenuBox for the Score and Lives counter
-    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ lives, 'Score ' + game_score);
-    p = player;  
-    //Character Positions
-    p.xPos = width / 2;
-    p.yPos = floorPos_y;
+    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ lives, 'Score ' + p.score);
     //Bools for Interaction
     //Tree Positions
     //camera
@@ -218,7 +222,7 @@ function startGame() {
     enemies = [];
     enemies.push(new Enemies(100, floorPos_y - 10, 100));
     //Game Score
-    game_score = 0;
+    p.score = 0;
     console.log("Game Started");
 }
 function createPlatforms(x,y,length){

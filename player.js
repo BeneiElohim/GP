@@ -1,6 +1,7 @@
 var player = {
     name: "Roger Glubbie Blubbie",
     nickname: "RGB Boy",
+    score: 0,
     xPos: 0,
     yPos: 0,
     isLeft: false,

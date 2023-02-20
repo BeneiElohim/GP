@@ -23,7 +23,7 @@ function checkCollectable(t_collectable) {
     var d = dist(p.xPos, p.yPos, t_collectable.x_pos, t_collectable.y_pos);
     if (d < 50) {
         t_collectable.isFound = true;
-        game_score += 1;
+        p.score += 1;
     }
 }
 function checkCanyon(t_canyon) {
