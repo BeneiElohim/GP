@@ -60,5 +60,4 @@ function checkPlayerDie() {
             startGame();
         }
     }
-
 }

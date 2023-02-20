@@ -35,16 +35,16 @@ function Cloud() {
   ] // array of cloud objects, with xpos and ypos values
   this.drawCloud = function() {
     for (var i = 0; i<clouds.length; i++) {
-      fill(255, 255, 255, 170);
-      ellipse(clouds[i].x_pos - 39, clouds[i].y_pos + 4, clouds[i].size);
-      fill(255, 255, 255, 160);
+      fill(12,21,37,170);
+      ellipse(clouds[i].x_pos - 39 , clouds[i].y_pos + 4, clouds[i].size);
+      fill(65,97,112, 160);
       ellipse(clouds[i].x_pos - 25, clouds[i].y_pos - 30, clouds[i].size - 10);
-      fill(255, 255, 255, 150);
+      fill(39,65,82, 150);
       ellipse(clouds[i].x_pos, clouds[i].y_pos + 4, clouds[i].size + 10);
-      fill(255, 255, 255, 160);
+      fill(102,142,150, 160);
       ellipse(clouds[i].x_pos, clouds[i].y_pos - 30, clouds[i].size - 5);
+    }
   }
-}
 }
 function Star(glistening) {
     this.glistening = glistening; // size of the star

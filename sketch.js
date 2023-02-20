@@ -1,39 +1,25 @@
-//creating global player object variable
 var p;
-//Game Character Positions
 var floorPos_y;
-//Bool for the welcome menu
 var isMenu;
-//variable for the scenery
-var stars;
-//Camera
 var cameraPosX;
-//Flagpole for game end
 var flagpole;
-//Lives variable
-var lives;
-//Multiple collectables
 var collectables;
-//Multiple canyons
 var canyons;
-//Menu fade code to control menu fade in/out
 var menuFade = 255;
 var menuMascot;
-//Life Shapes for the players remaining lives
 var lifeShape;
-//platforms
 var platforms;
-//enemies
-//menues
 var welcomeScreen;
 var mountains;
 function preload() {
     soundFormats('mp3', 'ogg');
     myFont = loadFont("assets/kozmin.otf");
+    lightInUs= loadSound("assets/light-in-us.mp3");
 }
 
 function setup() {
     //background
+    lightInUs.play();
     createCanvas(1024, 576);
     p = player;
     p.lives = 3;
@@ -54,8 +40,7 @@ function draw() {
     trees.drawTree(); //draw the trees using the tree class method
     clouds.drawCloud(); //draw the clouds using the cloud class method
     stars.drawStar(); //draw the stars using the star class method
-    //the game character
-    p.playerMovement();
+    p.playerMovement(); //method that will control the player movement along with player look
     for (var i = 0; i < collectables.length; i++) {
         //check if game character is too close to the collectable
         if (!collectables[i].isFound) {
@@ -88,9 +73,7 @@ function draw() {
     }
     pop();
     //Score drawing function
-    fill(255, 255, 255);
-    noStroke();
-    text("Score: " + p.score, 20, 20);
+    typeScore();
     drawLife();
     if (p.lives < 1) {
         fill(255, 255, 255);
@@ -161,7 +144,7 @@ function startGame() {
     isMenu = true;
     //platforms
     platforms = [];
-    platforms.push(createPlatforms(100,floorPos_y-100,100));
+    platforms.push(createPlatforms(100,floorPos_y-100,100,255));
     //enemies
     enemies = [];
     enemies.push(new Enemies(100, floorPos_y - 10, 100));
@@ -169,15 +152,22 @@ function startGame() {
     p.score = 0;
     console.log("Game Started");
 }
-function createPlatforms(x,y,length){
-
+function createPlatforms(x,y,length,updateRange){
+    var update = 255;
     var p = {
         x: x,
         y: y,
         length: length,
+        updateRange: updateRange,
         draw: function(){
-            fill(150);
-            rect(this.x, this.y, this.length, 20);
+            stroke(255)
+            strokeWeight(2);
+            fill(255,0,0,update + random(-updateRange,updateRange));
+            rect(this.x, this.y, this.length/3, 20);
+            fill(0,255,0,update + random(-updateRange,updateRange));
+            rect(this.x+this.length/3, this.y, this.length/3, 20);
+            fill(0,0,255,update + random(-updateRange,updateRange) );
+            rect(this.x+this.length/3 * 2, this.y, this.length/3, 20);
         },
         checkContact: function(gc_x, gc_y){
             if(gc_x > this.x && gc_x < this.x + this.length){
@@ -187,10 +177,7 @@ function createPlatforms(x,y,length){
                     return true;
                 }
             }
-
-        }
-}
+        },
+    }
     return p;
 }
-
-

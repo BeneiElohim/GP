@@ -46,15 +46,6 @@ function Mascot(headColor, bodyColor, legColor,gcX,gcY, size) {
         rect(this.gcX + 152, this.gcY -160, this.size * 0.4, this.size / 2);
     }
 }
-function Score(score){
-    this.score = score;
-    this.drawScore = function(){
-        fill(255);
-        textSize(20);
-        textFont("Arial");
-        text("Score: " + this.score, 20, 30);
-    }
-}
 function drawLife() {
     fill(255);
     noStroke();
@@ -75,4 +66,9 @@ function drawLife() {
     fill(0, 0, 255);
     ellipse(122, 35, 10);
     }
+}
+function typeScore() {
+    fill(255, 255, 255);
+    noStroke();
+    text("Score: " + p.score, 20, 20);
 }
