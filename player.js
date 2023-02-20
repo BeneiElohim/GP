@@ -52,12 +52,12 @@ var player = {
     jumpingForward: function() {
         console.log("jumping forward");
         fill(200, 0, 10)
-        ellipse(this.yPos, this.yPos - 70, 20, 20);
+        ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
-        rect(this.yPos - 10, this.yPos - 60, 20, 30);
+        rect(this.xPos - 10, this.yPos - 60, 20, 30);
         fill(60, 105, 225);
-        rect(this.yPos - 10, this.yPos - 30, 8, 10);
-        rect(this.yPos + 2, this.yPos - 40, 8, 10);
+        rect(this.xPos - 10, this.yPos - 30, 8, 10);
+        rect(this.xPos + 2, this.yPos - 40, 8, 10);
     },
     standing: function() {
         console.log("standing");

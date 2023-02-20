@@ -2,7 +2,6 @@
 var p;
 //Game Character Positions
 var floorPos_y;
-//Bools for controling the animation of the character.
 //Bool for the welcome menu
 var isMenu;
 //variable for the scenery

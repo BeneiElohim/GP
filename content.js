@@ -29,7 +29,7 @@ function checkCollectable(t_collectable) {
 function checkCanyon(t_canyon) {
     //check if character is over a canyon
     if (p.xPos > t_canyon.x_pos && p.xPos < t_canyon.x_pos + t_canyon.width && p.yPos >= floorPos_y) {
-        isPlummeting = true;
+        p.isPlummeting = true;
     }
 }
 function renderFlagpole() {
