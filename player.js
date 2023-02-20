@@ -2,6 +2,7 @@ var player = {
     name: "Roger Glubbie Blubbie",
     nickname: "RGB Boy",
     score: 0,
+    lives: 3,
     xPos: 0,
     yPos: 0,
     isLeft: false,
@@ -69,5 +70,34 @@ var player = {
         fill(60, 105, 225);
         rect(this.xPos - 10, this.yPos - 10, 8, 10);
         rect(this.xPos + 2, this.yPos - 10, 8, 10);        
-    }
+    },
+    checkDeath: function() {
+            if (this.yPos > height) {
+                --this.lives;
+                if (this.lives > 0) {
+                    startGame();
+                }
+            }
+        },
+    playerMovement: function() {
+        if (this.isLeft && this.isFalling) {
+            this.jumpingLeft();
+        }
+        else if (this.isRight && this.isFalling) {
+            this.jumpingRight();
+        }
+    
+        else if (this.isLeft) {
+            this.walkingLeft();
+        }
+        else if (this.isRight) {
+            this.walkingRight();
+        }
+        else if (this.isFalling || this.isPlummeting) {
+            this.jumpingForward();
+        }
+        else {
+            this.standing();
+        }
+    },
 }

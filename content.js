@@ -55,8 +55,8 @@ function checkFlagpole() {
 }
 function checkPlayerDie() {
     if (p.yPos > height) {
-        --lives;
-        if (lives > 0) {
+        --p.lives;
+        if (p.lives > 0) {
             startGame();
         }
     }

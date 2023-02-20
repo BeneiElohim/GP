@@ -8,8 +8,6 @@ var isMenu;
 var stars;
 //Camera
 var cameraPosX;
-//Game Score
-var game_score;
 //Flagpole for game end
 var flagpole;
 //Lives variable
@@ -37,7 +35,8 @@ function preload() {
 function setup() {
     //background
     createCanvas(1024, 576);
-    lives = 3;
+    p = player;
+    p.lives = 3;
     floorPos_y = height * 3 / 4;
     startGame();
 }
@@ -62,25 +61,7 @@ function draw() {
     //New Star object and drawing it
     stars.drawStar();
     //the game character
-    if (p.isLeft && p.isFalling) {
-        p.jumpingLeft();
-    }
-    else if (p.isRight && p.isFalling) {
-        p.jumpingRight();
-    }
-
-    else if (p.isLeft) {
-        p.walkingLeft();
-    }
-    else if (p.isRight) {
-        p.walkingRight();
-    }
-    else if (p.isFalling || p.isPlummeting) {
-        p.jumpingForward();
-    }
-    else {
-        p.standing();
-    }
+    p.playerMovement();
     for (var i = 0; i < collectables.length; i++) {
         //check if game character is too close to the collectable
         if (!collectables[i].isFound) {
@@ -100,14 +81,14 @@ function draw() {
     if (!flagpole.isReached) {
         checkFlagpole();
     }
-    checkPlayerDie();
+    p.checkDeath();
     for (var i = 0; i < enemies.length; i++) {
         enemies[i].draw();
         var isContact = enemies[i].checkContact(p.xPos, p.yPos);
-        if (isContact && lives > 0) {
+        if (isContact && p.lives > 0) {
             startGame();
             console.log("contact");
-            lives--;
+            p.lives--;
             break;
         }
     }
@@ -120,7 +101,7 @@ function draw() {
 /*     for (var i = 0; i < lives; i++) {
         drawLife(lives);
     } */
-    if (lives < 1) {
+    if (p.lives < 1) {
         fill(255, 255, 255);
         textSize(20);
         text("GAME OVER", 500, 300);
@@ -141,7 +122,7 @@ function draw() {
         isMenu = false;
     }
     //Welcome Screen
-    if (isMenu && lives == 3) {
+    if (isMenu && p.lives == 3) {
         welcomeScreen = new MenuBox(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
         welcomeScreen.drawMenu();
         //Character Shape
@@ -174,7 +155,6 @@ function draw() {
     }
 }
 function startGame() {
-    p = player;
     p.isFalling = false;
     p.isPlummeting = false;
     p.isLeft = false;
@@ -186,7 +166,7 @@ function startGame() {
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     // MenuBox for the Score and Lives counter
-    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ lives, 'Score ' + p.score);
+    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ p.lives, 'Score ' + p.score);
     //Bools for Interaction
     //Tree Positions
     //camera
