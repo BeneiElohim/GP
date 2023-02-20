@@ -50,16 +50,10 @@ function draw() {
     rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
     push();
     translate(-cameraPosX, 0)
-    //Declaring a new mountain object and drawing it
-    mountains = new Mountain(color(54,35,18,220),color(270));
-    mountains.drawMountain();
-    //Declaring a new tree object and drawing it
-    trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);
-    trees.drawTree();
-    //Declaring a new cloud object and drawing it
-    clouds.drawCloud();
-    //New Star object and drawing it
-    stars.drawStar();
+    mountains.drawMountain(); //draw the mountains using the mountain class method
+    trees.drawTree(); //draw the trees using the tree class method
+    clouds.drawCloud(); //draw the clouds using the cloud class method
+    stars.drawStar(); //draw the stars using the star class method
     //the game character
     p.playerMovement();
     for (var i = 0; i < collectables.length; i++) {
@@ -97,7 +91,7 @@ function draw() {
     fill(255, 255, 255);
     noStroke();
     text("Score: " + p.score, 20, 20);
-    drawLife
+    drawLife();
     if (p.lives < 1) {
         fill(255, 255, 255);
         textSize(20);
@@ -138,9 +132,7 @@ function startGame() {
     stars = new Star(6); //Creating a new star object
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
-    // MenuBox for the Score and Lives counter
-    //Bools for Interaction
-    //Tree Positions
+    trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);
     //camera
     cameraPosX = 0;
     //Canyon objects
