@@ -9,7 +9,7 @@ var player = {
     isRight: false,
     isFalling: false,
     isPlummeting: false,
-
+    speed: 1,
     walkingLeft: function() {
         console.log("walking left");
         fill(200, 0, 10)
@@ -99,5 +99,29 @@ var player = {
         else {
             this.standing();
         }
+        //walking left
+        if (this.isLeft == true) {
+        this.xPos -= 2 * this.speed;
+        }
+        //walking right
+        if (this.isRight == true) {
+        this.xPos += 2 * this.speed;
+        }
+        if (this.yPos < floorPos_y) {
+        for (var i = 0; i < platforms.length; i++) {
+            if (platforms[i].checkContact(this.xPos, this.yPos) == true) {
+                this.isFalling = false;
+                break;
+            }
+        this.yPos += 2 * this.speed;
+        this.isFalling = true;
+        }
+    }
+    if (this.yPos >= floorPos_y) {
+        this.isFalling = false;
+    }
+    if (this.isPlummeting == true) {
+        this.yPos += 3 * this.speed;
+    }
     },
 }

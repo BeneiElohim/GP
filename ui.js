@@ -28,50 +28,6 @@ function MenuBox(width, height, textPx, color,textColor,font,xPos,yPos,text1 = "
         text(this.text4, width/2, 220+height/2);
     }
 }
-function Lives(liveCount, xPos, yPos, textPx,size, colorText, colorLives1, colorLives2, colorLives3) {
-    this.liveCount = liveCount;
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.textPx = textPx;
-    this.size = size;
-    this.colorText = colorText;
-    this.colorLives1 = colorLives1;
-    this.colorLives2 = colorLives2;
-    this.colorLives3 = colorLives3;
-    
-    this.drawLives = function(){
-        fill(this.colorText);
-        textSize(this.textPx);
-        text("Lives: " + this.liveCount, this.xPos, this.yPos);
-        if(this.liveCount >= 1){
-            fill(this.colorLives1);
-            ellipse(this.xPos + 62, this.yPos - 5, this.size);
-        }
-        if(this.liveCount >= 2){
-            fill(this.colorLives2);
-            ellipse(this.xPos + 82, this.yPos - 5, this.size);
-        }
-        if(this.liveCount >= 3){
-            fill(this.colorLives3);
-            ellipse(this.xPos + 102, this.yPos - 5, this.size);
-        }
-    }
-    this.takeLife = function(){
-        this.liveCount--;
-    }
-    this.endGame = function(){
-        if(this.liveCount <= 0){
-            fill(255, 255, 255);
-            textSize(20);
-            text("GAME OVER", 500, 300);
-            text("Press space to continue.", 500, 350);
-            return true;
-        }
-    }
-
-
-}
-
 function Mascot(headColor, bodyColor, legColor,gcX,gcY, size) {
     this.headColor = headColor;
     this.bodyColor = bodyColor;
@@ -97,5 +53,26 @@ function Score(score){
         textSize(20);
         textFont("Arial");
         text("Score: " + this.score, 20, 30);
+    }
+}
+function drawLife() {
+    fill(255);
+    noStroke();
+    textSize(15);
+    text("Lives: " + p.lives, 20, 40);
+    if(p.lives >= 1){
+    //red circle
+    fill(255, 0, 0);
+    ellipse(82, 35, 10);
+    }
+    if(p.lives >= 2){
+    //green circle
+    fill(0, 255, 0);
+    ellipse(102, 35, 10);
+    }
+    if(p.lives >= 3){
+    //blue circle
+    fill(0, 0, 255);
+    ellipse(122, 35, 10);
     }
 }

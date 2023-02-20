@@ -94,13 +94,10 @@ function draw() {
     }
     pop();
     //Score drawing function
-    statCounter.drawMenu();
     fill(255, 255, 255);
     noStroke();
     text("Score: " + p.score, 20, 20);
-/*     for (var i = 0; i < lives; i++) {
-        drawLife(lives);
-    } */
+    drawLife();
     if (p.lives < 1) {
         fill(255, 255, 255);
         textSize(20);
@@ -129,30 +126,6 @@ function draw() {
         menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), p.xPos, p.yPos, 20);
         menuMascot.drawMascot();
     }
-    //walking left
-    if (p.isLeft == true) {
-        p.xPos -= 2;
-    }
-    //walking right
-    if (p.isRight == true) {
-        p.xPos += 2;
-    }
-    if (p.yPos < floorPos_y) {
-        for (var i = 0; i < platforms.length; i++) {
-            if (platforms[i].checkContact(p.xPos, p.yPos) == true) {
-                p.isFalling = false;
-                break;
-            }
-        p.yPos += 2;
-        p.isFalling = true;
-    }
-}
-    if (p.yPos >= floorPos_y) {
-        p.isFalling = false;
-    }
-    if (p.isPlummeting == true) {
-        p.yPos += 3;
-    }
 }
 function startGame() {
     p.isFalling = false;
@@ -166,7 +139,6 @@ function startGame() {
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     // MenuBox for the Score and Lives counter
-    statCounter = new MenuBox(50,40,6,color(0),color(255),myFont,0,0,'Lives '+ p.lives, 'Score ' + p.score);
     //Bools for Interaction
     //Tree Positions
     //camera
