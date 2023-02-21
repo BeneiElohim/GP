@@ -37,7 +37,7 @@ function setup() {
 }
 function draw() {
     //Positioning the camera to the center of the character
-    cameraPosX = p.xPos - 60;
+    cameraPosX = max(p.xPos - width/2, -150);
     ///////////DRAWING CODE//////////
     background(30, 30, 30); //fill the black background
     noStroke();
@@ -100,7 +100,7 @@ function draw() {
         welcomeScreen = new MenuBox(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
         welcomeScreen.drawMenu();
         //Character Shape
-        menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), p.xPos, p.yPos, 20);
+        menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), p.xPos + 480, p.yPos, 20);
         menuMascot.drawMascot();
     }
 }
