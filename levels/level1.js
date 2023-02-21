@@ -31,9 +31,7 @@ function setLevelOne() {
     for (var i = 0; i < platformArray.length; i++) {
         platforms.push(createPlatforms(platformArray[i].x_pos, platformArray[i].y_pos, platformArray[i].length, platformArray[i].updateRange));
     }
-    flagpole = [];
-    flagpoleArray= [{ x_pos: 1800, y_pos: floorPos_y, isReached: false }]
-    for (var i = 0; i < flagpoleArray.length; i++) {
-        flagpole.push(new Flagpole(flagpoleArray[i].x_pos, flagpoleArray[i].y_pos, flagpoleArray[i].isReached));
-    }
+    flagpoleLoc = { x_pos: 1800, y_pos: floorPos_y, isReached: false }
+    flagpole = new Flagpole(flagpoleLoc.x_pos, flagpoleLoc.y_pos, flagpoleLoc.isReached);
+
 }

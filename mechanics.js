@@ -132,9 +132,9 @@ function Flagpole(x,y, isReached){
         pop();
     }
     this.checkFlagpole = function(){
-        var d = abs(p.xPos - flagpole.x_pos);
+        var d = abs(p.xPos - this.x);
         if (d < 15) {
-        flagpole.isReached = true;
+        this.isReached = true;
         }
     }
 }

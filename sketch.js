@@ -16,6 +16,7 @@ function preload() {
     soundFormats('mp3', 'ogg');
     myFont = loadFont("assets/kozmin.otf");
     lightInUs= loadSound("assets/light-in-us.mp3");
+    stage = 0;
 }
 
 function setup() {
@@ -23,7 +24,6 @@ function setup() {
     lightInUs.play();
     createCanvas(1024, 576);
     p = player;
-    stage = 1;
     p.lives = 3;
     floorPos_y = height * 3 / 4;
     startGame();
@@ -55,9 +55,7 @@ function draw() {
     for (let i = 0; i < platforms.length; i++) {
         platforms[i].draw();
     }
-    for (let i = 0; i < flagpole.length; i++) {
-        flagpole[i].draw();
-    }
+    flagpole.draw();
     p.checkDeath();
     for (var i = 0; i < enemies.length; i++) {
         enemies[i].draw();
@@ -81,11 +79,8 @@ function draw() {
         return;
     }
     if (flagpole.isReached) {
-        fill(255, 255, 255);
-        textSize(20);
-        text("You Win!", 500, 300);
-        text("Press space to continue.", 500, 350);
-        return;
+        stage++;
+        setup();
     }
     ///////////INTERACTION CODE//////////
     //menu controls
@@ -102,7 +97,7 @@ function draw() {
         menuMascot.drawMascot();
     }
 }
-function startGame(stage) {
+function startGame() {
     p.isFalling = false;
     p.isPlummeting = false;
     p.isLeft = false;
@@ -129,19 +124,19 @@ function startGame(stage) {
 
 function setStage() {
     switch (stage) {
-        case 1:
+        case 0:
             setLevelOne();
             break;
-        case 2:
+        case 1:
             setLevelTwo();
             break;
-        case 3:
+        case 2:
             setLevelThree();
             break;
-        case 4:
+        case 3:
             setLevelFour();
             break;
-        case 5:
+        case 4:
             setLevelFive();
             break;
         default:
