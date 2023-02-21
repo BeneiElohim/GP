@@ -1,4 +1,5 @@
 var p;
+var stage;
 var floorPos_y;
 var isMenu;
 var cameraPosX;
@@ -22,6 +23,7 @@ function setup() {
     lightInUs.play();
     createCanvas(1024, 576);
     p = player;
+    stage = 1;
     p.lives = 3;
     floorPos_y = height * 3 / 4;
     startGame();
@@ -41,12 +43,10 @@ function draw() {
     clouds.drawCloud(); //draw the clouds using the cloud class method
     stars.drawStar(); //draw the stars using the star class method
     p.playerMovement(); //method that will control the player movement along with player look
-    for (var i = 0; i < collectables.length; i++) {
-        //check if game character is too close to the collectable
-        if (!collectables[i].isFound) {
-            checkCollectable(collectables[i]);
-            drawCollectable(collectables[i]);
-        }
+
+    /*  CODE TO DRAW GAME CONTENT*/
+    for (let i = 0; i < collectables.length; i++) {
+        collectables[i].draw();
     }
     //check if game character is too close to the canyon
     for (var k = 0; k < canyons.length; k++) {
@@ -104,7 +104,7 @@ function draw() {
         menuMascot.drawMascot();
     }
 }
-function startGame() {
+function startGame(stage) {
     p.isFalling = false;
     p.isPlummeting = false;
     p.isLeft = false;
@@ -116,6 +116,7 @@ function startGame() {
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);
+    setStage(stage);
     //camera
     cameraPosX = 0;
     //Canyon objects
@@ -125,19 +126,6 @@ function startGame() {
         { x_pos: 1098, y_pos: 400, width: 65 },
         { x_pos: 1598, y_pos: 400, width: 14 },
         { x_pos: 2098, y_pos: 400, width: 70 },]
-    //Collectable objects
-    collectables = [
-        { x_pos: 400, y_pos: 400, size: 40, isFound: false },
-        { x_pos: 800, y_pos: 400, size: 40, isFound: false },
-        { x_pos: 1200, y_pos: 400, size: 40, isFound: false },
-        { x_pos: 1600, y_pos: 400, size: 40, isFound: false },
-        { x_pos: 2000, y_pos: 400, size: 40, isFound: false },
-        { x_pos: 2400, y_pos: 400, size: 40, isFound: false },
-        { x_pos: 2800, y_pos: 400, size: 40, isFound: false },
-        { x_pos: -400, y_pos: 400, size: 40, isFound: false },
-        { x_pos: -800, y_pos: 400, size: 40, isFound: false },
-        { x_pos: -1200, y_pos: 400, size: 40, isFound: false },
-        { x_pos: -1600, y_pos: 400, size: 40, isFound: false },]
     //Flagpole
     flagpole = { x_pos: 1800, isReached: false }
     //Menu
@@ -180,4 +168,25 @@ function createPlatforms(x,y,length,updateRange){
         },
     }
     return p;
+}
+function setStage() {
+    switch (stage) {
+        case 1:
+            setLevelOne();
+            break;
+        case 2:
+            setLevelTwo();
+            break;
+        case 3:
+            setLevelThree();
+            break;
+        case 4:
+            setLevelFour();
+            break;
+        case 5:
+            setLevelFive();
+            break;
+        default:
+            console.log("Invalid stage number " + stage);
+    }
 }
