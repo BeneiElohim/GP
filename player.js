@@ -11,7 +11,6 @@ var player = {
     isPlummeting: false,
     speed: 1,
     walkingLeft: function() {
-        console.log("walking left");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
@@ -21,7 +20,6 @@ var player = {
         rect(this.xPos - 2, this.yPos - 10, 8, 10);
     },
     walkingRight: function() {
-        console.log("walking right");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
@@ -31,7 +29,6 @@ var player = {
         rect(this.xPos + 10, this.yPos - 10, 8, 10);
     },
     jumpingLeft: function() {
-        console.log("jumping left");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
@@ -42,7 +39,6 @@ var player = {
 
     },
     jumpingRight: function() {
-        console.log("jumping right");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
@@ -52,7 +48,6 @@ var player = {
         rect(this.xPos + 10, this.yPos - 40, 8, 10);    
     },
     jumpingForward: function() {
-        console.log("jumping forward");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);
@@ -62,7 +57,6 @@ var player = {
         rect(this.xPos + 2, this.yPos - 40, 8, 10);
     },
     standing: function() {
-        console.log("standing");
         fill(200, 0, 10)
         ellipse(this.xPos, this.yPos - 70, 20, 20);
         fill(38, 104, 0);

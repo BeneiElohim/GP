@@ -21,6 +21,7 @@ function preload() {
     p = player;
     p.lives = 3;
     p.score = 0;
+
 }
 
 function setup() {
@@ -36,7 +37,7 @@ function setup() {
 }
 function draw() {
     //Positioning the camera to the center of the character
-    cameraPosX = p.xPos - width / 2;
+    cameraPosX = p.xPos - 60;
     ///////////DRAWING CODE//////////
     background(30, 30, 30); //fill the black background
     noStroke();
@@ -109,7 +110,7 @@ function startGame() {
     p.isLeft = false;
     p.isRight = false;
     //Character Positions
-    p.xPos = width / 2;
+    p.xPos = 50;
     p.yPos = floorPos_y;
     stars = new Star(6); //Creating a new star object
     clouds = new Cloud(); //Creating a new cloud object
@@ -120,11 +121,6 @@ function startGame() {
     cameraPosX = 0;
     //Menu
     isMenu = true;
-    //enemies
-    enemies = [];
-    enemies.push(new Enemies(100, floorPos_y - 10, 100));
-    //Game Score
-    console.log("Game Started");
 }
 
 function setStage() {

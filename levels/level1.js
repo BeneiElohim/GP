@@ -31,6 +31,12 @@ function setLevelOne() {
     for (var i = 0; i < platformArray.length; i++) {
         platforms.push(createPlatforms(platformArray[i].x_pos, platformArray[i].y_pos, platformArray[i].length, platformArray[i].updateRange));
     }
+    enemies = [];
+    var enemyArray = [
+        { x_pos: 200, y_pos: 400, range:100, speed:2 },]
+    for (var i = 0; i < enemyArray.length; i++) {
+        enemies.push(new Enemy(enemyArray[i].x_pos, enemyArray[i].y_pos, enemyArray[i].range, enemyArray[i].speed));
+    }
     flagpoleLoc = { x_pos: 1800, y_pos: floorPos_y, isReached: false }
     flagpole = new Flagpole(flagpoleLoc.x_pos, flagpoleLoc.y_pos, flagpoleLoc.isReached);
 

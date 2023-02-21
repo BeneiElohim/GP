@@ -42,11 +42,12 @@ function Collectable(x,y, isFound) {
         }
     }
 }
-function Enemies(x,y,range){
+function Enemy(x,y,range, speed){
     this.x = x;
     this.y = y;
     this.range = range;
     this.currentX = x;
+    this.speed = speed;
     this.inc = 1;
     base = 170;
     updateRange = 40;
@@ -54,10 +55,10 @@ function Enemies(x,y,range){
     this.update = function(){
         this.currentX += this.inc;
         if(this.currentX >= this.x + this.range){
-            this.inc = -1;
+            this.inc = -1 * this.speed;
         }
         else if (this.currentX < this.x){
-            this.inc = 1;
+            this.inc = 1 * this.speed;
         }
     },
     this.draw = function(){
