@@ -49,16 +49,14 @@ function draw() {
         collectables[i].draw();
     }
     //check if game character is too close to the canyon
-    for (var k = 0; k < canyons.length; k++) {
-        drawCanyon(canyons[k]);
-        checkCanyon(canyons[k]);
+    for (let i = 0; i < canyons.length; i++) {
+        canyons[i].draw();
     }
-    for (var i = 0; i < platforms.length; i++) {
+    for (let i = 0; i < platforms.length; i++) {
         platforms[i].draw();
     }
-    renderFlagpole();
-    if (!flagpole.isReached) {
-        checkFlagpole();
+    for (let i = 0; i < flagpole.length; i++) {
+        flagpole[i].draw();
     }
     p.checkDeath();
     for (var i = 0; i < enemies.length; i++) {
@@ -119,20 +117,8 @@ function startGame(stage) {
     setStage(stage);
     //camera
     cameraPosX = 0;
-    //Canyon objects
-    canyons = [
-        { x_pos: 98, y_pos: 400, width: 60 },
-        { x_pos: 598, y_pos: 400, width: 110 },
-        { x_pos: 1098, y_pos: 400, width: 65 },
-        { x_pos: 1598, y_pos: 400, width: 14 },
-        { x_pos: 2098, y_pos: 400, width: 70 },]
-    //Flagpole
-    flagpole = { x_pos: 1800, isReached: false }
     //Menu
     isMenu = true;
-    //platforms
-    platforms = [];
-    platforms.push(createPlatforms(100,floorPos_y-100,100,255));
     //enemies
     enemies = [];
     enemies.push(new Enemies(100, floorPos_y - 10, 100));
@@ -140,35 +126,7 @@ function startGame(stage) {
     p.score = 0;
     console.log("Game Started");
 }
-function createPlatforms(x,y,length,updateRange){
-    var update = 255;
-    var p = {
-        x: x,
-        y: y,
-        length: length,
-        updateRange: updateRange,
-        draw: function(){
-            stroke(255)
-            strokeWeight(2);
-            fill(255,0,0,update + random(-updateRange,updateRange));
-            rect(this.x, this.y, this.length/3, 20);
-            fill(0,255,0,update + random(-updateRange,updateRange));
-            rect(this.x+this.length/3, this.y, this.length/3, 20);
-            fill(0,0,255,update + random(-updateRange,updateRange) );
-            rect(this.x+this.length/3 * 2, this.y, this.length/3, 20);
-        },
-        checkContact: function(gc_x, gc_y){
-            if(gc_x > this.x && gc_x < this.x + this.length){
-                var d = this.y - gc_y;
-                if(d >= 0 && d < 5){
-                    console.log("contact on pt");
-                    return true;
-                }
-            }
-        },
-    }
-    return p;
-}
+
 function setStage() {
     switch (stage) {
         case 1:
