@@ -16,15 +16,21 @@ function preload() {
     soundFormats('mp3', 'ogg');
     myFont = loadFont("assets/kozmin.otf");
     lightInUs= loadSound("assets/light-in-us.mp3");
+    lightInUs.setVolume(0.5);
     stage = 0;
+    p = player;
+    p.lives = 3;
+    p.score = 0;
 }
 
 function setup() {
     //background
-    lightInUs.play();
+    if (!lightInUs.isPlaying()){
+        lightInUs.play();
+        console.log("playing");
+    }
     createCanvas(1024, 576);
-    p = player;
-    p.lives = 3;
+
     floorPos_y = height * 3 / 4;
     startGame();
 }
@@ -118,7 +124,6 @@ function startGame() {
     enemies = [];
     enemies.push(new Enemies(100, floorPos_y - 10, 100));
     //Game Score
-    p.score = 0;
     console.log("Game Started");
 }
 
