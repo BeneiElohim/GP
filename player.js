@@ -102,15 +102,20 @@ var player = {
         this.xPos += 2 * this.speed;
         }
         if (this.yPos < floorPos_y) {
-        for (var i = 0; i < platforms.length; i++) {
-            if (platforms[i].checkContact(this.xPos, this.yPos) == true) {
-                this.isFalling = false;
-                break;
+            var onPlatform = false;
+            for (var i = 0; i < platforms.length; i++) {
+                if (platforms[i].checkContact(this.xPos, this.yPos) == true) {
+                    onPlatform = true;
+                    break;
+                }
             }
-        this.yPos += 2 * this.speed;
-        this.isFalling = true;
-        }
-    }
+            if (onPlatform) {
+                this.isFalling = false;
+            } else {
+                this.yPos += 2 * this.speed;
+                this.isFalling = true;
+            }
+        }        
     if (this.yPos >= floorPos_y) {
         this.isFalling = false;
     }

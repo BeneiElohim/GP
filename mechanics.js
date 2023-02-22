@@ -73,7 +73,7 @@ function Enemy(x,y,range, speed){
 },
     this.checkContact = function(gc_x, gc_y){
         var d = dist(gc_x, gc_y, this.currentX, this.y);
-        if(d < 20){
+        if(d < 40){
             console.log("contact on enemy");
             return true;
         }

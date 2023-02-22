@@ -27,7 +27,9 @@ function setLevelOne() {
     }
     platforms = [];
     var platformArray = [
-        { x_pos: 100, y_pos:332, length: 100, updateRange: 255 }]
+        { x_pos: 100, y_pos:332, length: 100, updateRange: 255 },
+        { x_pos: 600, y_pos: 332, length: 100, updateRange: 255 },
+        { x_pos: 1100, y_pos: 332, length: 100, updateRange: 255 },]
     for (var i = 0; i < platformArray.length; i++) {
         platforms.push(createPlatforms(platformArray[i].x_pos, platformArray[i].y_pos, platformArray[i].length, platformArray[i].updateRange));
     }
