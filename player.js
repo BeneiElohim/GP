@@ -74,6 +74,8 @@ var player = {
             }
         },
     playerMovement: function() {
+        strokeWeight(3);
+        stroke(0);
         if (this.isLeft && this.isFalling) {
             this.jumpingLeft();
         }

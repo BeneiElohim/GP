@@ -12,6 +12,7 @@ var lifeShape;
 var platforms;
 var welcomeScreen;
 var mountains;
+var devMode = false;
 function preload() {
     soundFormats('mp3', 'ogg');
     myFont = loadFont("assets/kozmin.otf");
@@ -36,6 +37,12 @@ function setup() {
     startGame();
 }
 function draw() {
+
+    if (devMode){
+        p.xPos = mouseX;
+        p.yPos = mouseY;
+    }
+    p.xPos = constrain(p.xPos, -134, p.xPos);
     //Positioning the camera to the center of the character
     cameraPosX = max(p.xPos - width/2, -150);
     ///////////DRAWING CODE//////////
