@@ -19,7 +19,7 @@ function preload() {
     myFont = loadFont("assets/kozmin.otf");
     lightInUs= loadSound("assets/light-in-us.mp3");
     lightInUs.setVolume(0.5);
-    stage = 0;
+    stage = 1;
     p = player;
     p.lives = 3;
     p.score = 0;
