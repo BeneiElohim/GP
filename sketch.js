@@ -46,8 +46,8 @@ function draw() {
     p.xPos = constrain(p.xPos, -134, p.xPos);
     //Positioning the camera to the center of the character
     cameraPosX = max(p.xPos - width/2, -150);
-    ///////////DRAWING CODE//////////
-    background(30, 30, 30); //fill the black background
+    ///////////DRAWING CODE////////// //fill the black background
+    drawSky(p.score); //draw the background
     noStroke();
     push();
     translate(-cameraPosX, 0)
@@ -123,7 +123,7 @@ function startGame() {
     //Character Positions
     p.xPos = 50;
     p.yPos = floorPos_y;
-    stars = new Star(6); //Creating a new star object
+    stars = new Star(6,p.score); //Creating a new star object
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);

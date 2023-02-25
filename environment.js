@@ -9,6 +9,7 @@ function Mountain(bcolor, tcolor) {
     { x_pos: -400, y_pos: 432 }]; // array of mountain objects, with xpos and ypos values
   this.drawMountain = function() {
     for (var i = 0; i < mountains.length; i++) {
+    noStroke();
     fill(this.bcolor); // bottom color of the mountain
     triangle(mountains[i].x_pos, mountains[i].y_pos, mountains[i].x_pos + 300, mountains[i].y_pos, mountains[i].x_pos + 150, mountains[i].y_pos - 300);
     fill(this.tcolor); // top color of the mountain
@@ -35,6 +36,7 @@ function Cloud() {
   ] // array of cloud objects, with xpos and ypos values
   this.drawCloud = function() {
     for (var i = 0; i<clouds.length; i++) {
+      noStroke();
       fill(12,21,37,170);
       ellipse(clouds[i].x_pos - 39 , clouds[i].y_pos + 4, clouds[i].size);
       fill(65,97,112, 160);
@@ -46,7 +48,7 @@ function Cloud() {
     }
   }
 }
-function Star(glistening) {
+function Star(glistening,score) {
     this.glistening = glistening; // size of the star
   var stars = [{ x_pos: -50, y_pos: 60 }
     , { x_pos: 0, y_pos: 50 }
@@ -67,7 +69,8 @@ function Star(glistening) {
     , { x_pos: 1500, y_pos: 40 }] // array of star objects, with xpos and ypos values
     this.drawStar = function() {
     for (var i = 0; i < stars.length; i++) {
-      fill(255);
+      noStroke();
+      fill(255,255,255,255-score*30);
       ellipse(stars[i].x_pos, stars[i].y_pos, random(0,this.glistening));
     }
   }
@@ -92,7 +95,7 @@ function Snowflake() {
   this.drawSnowflake = function() {
     this.fall();
     fill(255);
-    ellipse(this.x, this.y, this.d, this.d);
+    ellipse(this.x, this.y, this.d);
   }
   this.fall = function() {
     this.y = this.y + this.d;
@@ -112,4 +115,22 @@ function drawFloors(score) {
      rect(i+j+15, floorPos_y + j, 40, 12);
    }
  }
+}
+/* function drawBackground() {
+  //draw the sky with a gradient
+  for (var i = 0; i < height; i++) {
+    var inter = map(i, 0, height, 0, 1);
+    var c = lerpColor(color(0, 0, 0), color(0, 0, 255), inter);
+    stroke(c);
+    line(0, i, width, i);
+  }
+  //draw the sun
+  fill(255, 255, 0);
+  ellipse(100, 100, 100, 100);
+  //draw the moon
+  fill(255, 255, 255);
+  ellipse(200, 100, 100, 100);
+} */
+function drawSky(score){
+background(min(30+score*6,170),min(30+score*6,170),min(30+score*12,255));
 }
