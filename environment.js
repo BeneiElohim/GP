@@ -78,9 +78,9 @@ function Tree(floor) {
   trees_y = floor-150;
   this.drawTree= function() {
     for (var i = 0; i < trees_x.length; i++) {
-    fill(90, 40, 19);
+    fill(min(14+p.score*4,90), min(2+p.score*2,40), min(p.score*2,20));
     rect(trees_x[i], trees_y + 19, 50, 130);
-    fill(0, 101, 0);
+    fill(0, min(p.score*10,190), 0);
     triangle(trees_x[i] - 50, trees_y + 30, trees_x[i] + 30, trees_y - 136, trees_x[i] + 100, trees_y + 30);
     }
   }
