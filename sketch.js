@@ -75,6 +75,9 @@ function draw() {
     
     flagpole.draw();
     p.checkDeath();
+    if (p.isDead) {
+        return;
+    }
     for (var i = 0; i < enemies.length; i++) {
         enemies[i].draw();
         var isContact = enemies[i].checkContact(p.xPos, p.yPos);

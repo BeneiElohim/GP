@@ -116,21 +116,6 @@ function drawFloors(score) {
    }
  }
 }
-/* function drawBackground() {
-  //draw the sky with a gradient
-  for (var i = 0; i < height; i++) {
-    var inter = map(i, 0, height, 0, 1);
-    var c = lerpColor(color(0, 0, 0), color(0, 0, 255), inter);
-    stroke(c);
-    line(0, i, width, i);
-  }
-  //draw the sun
-  fill(255, 255, 0);
-  ellipse(100, 100, 100, 100);
-  //draw the moon
-  fill(255, 255, 255);
-  ellipse(200, 100, 100, 100);
-} */
 function drawSky(score){
 background(min(30+score*6,170),min(30+score*6,170),min(30+score*12,255));
 

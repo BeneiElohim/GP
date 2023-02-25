@@ -9,6 +9,7 @@ var player = {
     isRight: false,
     isFalling: false,
     isPlummeting: false,
+    isDead: false,
     speed: 1,
     walkingLeft: function() {
         fill(200, 0, 10)
@@ -70,6 +71,9 @@ var player = {
                 --this.lives;
                 if (this.lives > 0) {
                     startGame();
+                }
+                else {
+                    this.isDead = true;
                 }
             }
         },

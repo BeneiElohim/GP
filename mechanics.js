@@ -53,7 +53,7 @@ function Enemy(x,y,range, speed){
     updateRange = 40;
     sizeRange = 10;
     this.update = function(){
-        this.currentX += this.inc;
+        this.currentX += this.inc * this.speed;
         if(this.currentX >= this.x + this.range){
             this.inc = -1 * this.speed;
         }
