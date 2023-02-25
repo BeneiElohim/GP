@@ -49,10 +49,9 @@ function draw() {
     ///////////DRAWING CODE//////////
     background(30, 30, 30); //fill the black background
     noStroke();
-    fill(0, 155, 0);
-    rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
     push();
     translate(-cameraPosX, 0)
+    drawFloors(p.score); //draw the ground
     mountains.drawMountain(); //draw the mountains using the mountain class method
     trees.drawTree(); //draw the trees using the tree class method
     clouds.drawCloud(); //draw the clouds using the cloud class method
@@ -136,7 +135,6 @@ function startGame() {
     flakes= []
     for (var i = 0; i < 150 ; i++)
     flakes.push(new Snowflake());
-    
 }
 
 function setStage() {

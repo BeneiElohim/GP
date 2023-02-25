@@ -102,3 +102,14 @@ function Snowflake() {
   }
   
 }
+function drawFloors(score) {
+ floorHeight = height - floorPos_y;
+ for (var i = -900; i < 3000; i+= 25) {
+  for (var j = 0; j < floorHeight; j+=12) {
+    stroke(0);
+    strokeWeight(2);
+     fill(47+score*6,28+score*2,11);
+     rect(i+j+15, floorPos_y + j, 40, 12);
+   }
+ }
+}
