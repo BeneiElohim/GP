@@ -133,4 +133,22 @@ function drawFloors(score) {
 } */
 function drawSky(score){
 background(min(30+score*6,170),min(30+score*6,170),min(30+score*12,255));
+
+if (score < 8 && score >= 4) {
+  //draw the moon
+  fill(255, 255, 255,140);
+  ellipse(200, 100, 100, 100);
+  //draw the half sun
+  fill(255, 255, 0);
+  ellipse(100, 432, 100, 100);
+}
+if (score < 4) {
+  fill(255, 255, 255);
+  ellipse(200, 100, 100, 100);
+}
+if (score >= 8) {
+  //draw the sun
+  fill(255, 255, 0);
+  ellipse(100, 100, 100, 100);
+}
 }
