@@ -1,6 +1,7 @@
 function setLevelOne() {
     collectables = []
     var collectableArray = [
+        { x_pos: -143, y_pos: 220, isFound: false },
         { x_pos: 400, y_pos: 400, isFound: false },
         { x_pos: 800, y_pos: 400, isFound: false },
         { x_pos: 1200, y_pos: 400,isFound: false },

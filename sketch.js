@@ -117,6 +117,9 @@ function draw() {
         menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), p.xPos + 480, p.yPos, 20);
         menuMascot.drawMascot();
     }
+    fill(255);
+    textSize(20);
+    text("x is " + mouseX + " y is " + mouseY, mouseX, mouseY);
 }
 function startGame() {
     p.isFalling = false;
@@ -150,12 +153,6 @@ function setStage() {
             break;
         case 2:
             setLevelThree();
-            break;
-        case 3:
-            setLevelFour();
-            break;
-        case 4:
-            setLevelFive();
             break;
         default:
             console.log("Invalid stage number " + stage);

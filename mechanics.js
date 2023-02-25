@@ -2,7 +2,7 @@ function Canyon(x,y,width){
     this.x = x;
     this.y = y;
     this.width = width;
-    
+      
     this.draw = function(){
     this.checkCanyon();
     fill(56, 0, 0);
