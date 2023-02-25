@@ -12,6 +12,7 @@ var lifeShape;
 var platforms;
 var welcomeScreen;
 var mountains;
+var flakes;
 var devMode = false;
 function preload() {
     soundFormats('mp3', 'ogg');
@@ -69,6 +70,10 @@ function draw() {
     for (let i = 0; i < platforms.length; i++) {
         platforms[i].draw();
     }
+    for (let i = 0; i < flakes.length; i++) {
+        flakes[i].drawSnowflake();
+    }
+    
     flagpole.draw();
     p.checkDeath();
     for (var i = 0; i < enemies.length; i++) {
@@ -128,6 +133,10 @@ function startGame() {
     cameraPosX = 0;
     //Menu
     isMenu = true;
+    flakes= []
+    for (var i = 0; i < 150 ; i++)
+    flakes.push(new Snowflake());
+    
 }
 
 function setStage() {

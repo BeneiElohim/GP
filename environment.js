@@ -85,3 +85,20 @@ function Tree(floor) {
     }
   }
 }
+function Snowflake() {
+  this.x = random(-300, 2500);
+  this.y = random(0, height);
+  this.d = random(1, 5);
+  this.drawSnowflake = function() {
+    this.fall();
+    fill(255);
+    ellipse(this.x, this.y, this.d, this.d);
+  }
+  this.fall = function() {
+    this.y = this.y + this.d;
+    if (this.y > height) {
+      this.y = random(-200, -100);
+    }
+  }
+  
+}
