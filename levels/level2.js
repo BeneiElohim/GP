@@ -1,10 +1,16 @@
 function setLevelTwo() {
     collectables = []
     var collectableArray = [
-        { x_pos: 400, y_pos: 400, isFound: false },
-        { x_pos: 800, y_pos: 400, isFound: false },
-        { x_pos: 1200, y_pos: 400,isFound: false },
-        { x_pos: 1600, y_pos: 400,isFound: false },]
+        { x_pos: 188, y_pos: 300, isFound: false },
+        { x_pos: 326, y_pos: 220, isFound: false },
+        { x_pos: 482, y_pos: 126,isFound: false },
+        { x_pos: 482, y_pos: 176,isFound: false },
+        { x_pos: 540, y_pos: 226,isFound: false },
+        { x_pos: 462, y_pos: 276,isFound: false },
+        { x_pos: 390, y_pos: 400,isFound: false },
+        { x_pos: 616, y_pos: 356,isFound: false },
+        { x_pos: 996, y_pos: 266,isFound: false },
+        { x_pos: 1056, y_pos: 400,isFound: false },]
     for (var i = 0; i < collectableArray.length; i++) {
         collectables.push(new Collectable(collectableArray[i].x_pos, collectableArray[i].y_pos,collectableArray[i].isFound));
     }
