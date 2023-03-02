@@ -39,7 +39,6 @@ function setLevelTwo() {
     }
     enemies = [];
     var enemyArray = [
-        { x_pos: 200, y_pos: 400, range:150, speed:2 },
         { x_pos: -150, y_pos: 400, range: 300, speed: 1 },]
     for (var i = 0; i < enemyArray.length; i++) {
         enemies.push(new Enemy(enemyArray[i].x_pos, enemyArray[i].y_pos, enemyArray[i].range, enemyArray[i].speed));

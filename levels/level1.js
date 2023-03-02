@@ -30,8 +30,7 @@ function setLevelOne() {
     }
     enemies = [];
     var enemyArray = [
-        { x_pos: 200, y_pos: 400, range:300, speed:2.2 },
-        { x_pos: 800, y_pos: 400, range:100, speed:2 },
+        { x_pos: 200, y_pos: 400, range:300, speed:1.5 },
         { x_pos: 1220, y_pos: 300, range:250, speed:2 },]
     for (var i = 0; i < enemyArray.length; i++) {
         enemies.push(new Enemy(enemyArray[i].x_pos, enemyArray[i].y_pos, enemyArray[i].range, enemyArray[i].speed));

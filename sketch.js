@@ -19,7 +19,7 @@ function preload() {
     myFont = loadFont("assets/kozmin.otf");
     lightInUs= loadSound("assets/light-in-us.mp3");
     lightInUs.setVolume(0.5);
-    stage = 1;
+    stage = 0;
     p = player;
     p.lives = 3;
     p.score = 0;
@@ -104,17 +104,12 @@ function draw() {
         setup();
     }
     ///////////INTERACTION CODE//////////
-    //menu controls
-    menuFade = menuFade - 1;
-    if (menuFade < 0) {
-        isMenu = false;
-    }
     //Welcome Screen
     if (isMenu && p.lives == 3) {
-        welcomeScreen = new MenuBox(500,150,20,color(0,0,0,menuFade),color(255,255,255,menuFade),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
+        welcomeScreen = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD or Arrow keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
         welcomeScreen.drawMenu();
         //Character Shape
-        menuMascot = new Mascot(color(200,0,10,menuFade),color(38,104,0,menuFade),color(60,105,225,menuFade), p.xPos + 480, p.yPos, 20);
+        menuMascot = new Mascot(color(200,0,10),color(38,104,0),color(60,105,225), p.xPos + 480, p.yPos, 20);
         menuMascot.drawMascot();
     }
     fill(255);
