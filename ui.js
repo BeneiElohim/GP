@@ -86,7 +86,7 @@ function muteButton(){
 
 }
 function timer(){
-    if (stage != 3) {
+    if (stage != 3 && !isMenu) {
      milliseconds = frameCount % 60;
    if (frameCount % 60 == 0 && !p.isPlummeting) { 
         seconds++;
