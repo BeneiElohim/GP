@@ -13,12 +13,14 @@ var platforms;
 var welcomeScreen;
 var mountains;
 var flakes;
-var devMode = false;
+let isMuted = false;
 function preload() {
     soundFormats('mp3', 'ogg');
-    myFont = loadFont("assets/kozmin.otf");
+    kozminFont = loadFont("assets/kozmin.otf");
     lightInUs= loadSound("assets/light-in-us.mp3");
-    lightInUs.setVolume(0.5);
+    lightInUs.setVolume(0.4);
+    jumpEffect = loadSound("assets/jump.mp3");
+    jumpEffect.setVolume(0.1);
     stage = 0;
     p = player;
     p.lives = 3;
@@ -28,21 +30,13 @@ function preload() {
 
 function setup() {
     //background
-    if (!lightInUs.isPlaying()){
-        lightInUs.play();
-        console.log("playing");
-    }
+
     createCanvas(1024, 576);
 
     floorPos_y = height * 3 / 4;
     startGame();
 }
 function draw() {
-
-    if (devMode){
-        p.xPos = mouseX;
-        p.yPos = mouseY;
-    }
     p.xPos = constrain(p.xPos, -134, p.xPos);
     //Positioning the camera to the center of the character
     cameraPosX = max(p.xPos - width/2, -150);
@@ -92,6 +86,7 @@ function draw() {
     //Score drawing function
     typeScore();
     drawLife();
+    muteButton();
     if (p.lives < 1) {
         fill(255, 255, 255);
         textSize(20);
@@ -106,15 +101,20 @@ function draw() {
     ///////////INTERACTION CODE//////////
     //Welcome Screen
     if (isMenu && p.lives == 3) {
-        welcomeScreen = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),myFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD or Arrow keys to move!", "Click on the screen to skip this.","P.S You can call him RGB Boy :)");
+        welcomeScreen = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"Welcome to the adventures of Roger Gump Bump!", "Use WASD or Arrow keys to move! ", "You can press M to mute.","Click your screen to skip this menu.");
         welcomeScreen.drawMenu();
         //Character Shape
         menuMascot = new Mascot(color(200,0,10),color(38,104,0),color(60,105,225), p.xPos + 480, p.yPos, 20);
         menuMascot.drawMascot();
     }
-    fill(255);
-    textSize(20);
-    text("x is " + mouseX + " y is " + mouseY, mouseX, mouseY);
+    muteButton();
+    if (!lightInUs.isPlaying() && isMuted == false && isMenu == false){
+        lightInUs.play();
+    }
+    else if (isMuted == true){
+        lightInUs.pause();
+    }
+
 }
 function startGame() {
     p.isFalling = false;
@@ -134,7 +134,17 @@ function startGame() {
     //Menu
     isMenu = true;
     flakes= []
-    for (var i = 0; i < 150 ; i++)
+    let flakeCount = 150;
+    if (stage == 0) {
+        flakeCount = 150;
+    }
+    else if (stage == 1) {
+        flakeCount = 100;
+    }
+    else if (stage == 2) {
+        flakeCount = 50;
+    }
+    for (var i = 0; i < flakeCount ; i++)
     flakes.push(new Snowflake());
 }
 

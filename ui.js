@@ -72,3 +72,16 @@ function typeScore() {
     noStroke();
     text("Score: " + p.score, 20, 20);
 }
+function muteButton(){
+    fill(255, 255, 255);
+    noStroke();
+    rect(5, 510, 30, 20);
+    triangle(17,521,39,493,39,549);
+
+    if (isMuted == true) {
+        fill(255, 0, 0);
+        rect(5, 510, 30, 20);
+        triangle(17, 521, 39, 493, 39, 549);
+    }
+
+}
