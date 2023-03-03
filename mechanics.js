@@ -123,13 +123,19 @@ function Flagpole(x,y, isReached){
         stroke(100);
         line(this.x, this.y, this.x, this.y - 250);
         noStroke();
-        fill(255, 0, 0);
-        if (this.isReached) {
-            rect(this.x, this.y - 250, 50, 50);
-        }
-        else {
-            rect(this.x, this.y - 50, 50, 50);
-        }
+        fill(255);
+        rect(this.x, this.y - 250, 50, 50);
+
+        strokeWeight(5);
+        stroke(0);
+        fill(255);
+        triangle(this.x + 2, 30+this.y - 240, 40+this.x + 2, 30+this.y - 240, 20+this.x + 2, 0+this.y - 240); //BG Triangle
+        fill(0,0,255); 
+        triangle(this.x + 2+10, 14+this.y - 240, 30+this.x + 2, 14+this.y - 240, 20+this.x + 2, this.y - 240 ); //Top One Triangle
+        fill(255,0,0);
+        triangle(this.x + 2, 30+this.y - 240, 18+this.x + 2, 30+this.y - 240, 10+this.x + 2, 14+this.y - 240); //Bottom left
+        fill(0,255,0);
+        triangle(this.x + 2 + 20, 30+this.y - 240, 40+this.x + 2, 30+this.y - 240, 30+this.x + 2, 14+this.y - 240); //Bottom Right  
         pop();
     }
     this.checkFlagpole = function(){

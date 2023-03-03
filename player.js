@@ -120,15 +120,18 @@ var player = {
             if (onPlatform) {
                 this.isFalling = false;
             } else {
-                this.yPos += 2 * this.speed;
+                this.yPos += 2 ;
+                this.speed = 1.2; 
                 this.isFalling = true;
+                console.log(this.speed)
             }
         }        
     if (this.yPos >= floorPos_y) {
         this.isFalling = false;
+        this.speed = 1;
     }
     if (this.isPlummeting == true) {
-        this.yPos += 3 * this.speed;
+        this.yPos += 3 ;
     }
     },
 }

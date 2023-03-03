@@ -13,6 +13,11 @@ var welcomeScreen;
 var mountains;
 var flakes;
 let seconds = 0;
+let minutes = 0;
+let milliseconds = 0;
+let secondsEnd = 0;
+let minutesEnd = 0;
+let millisecondsEnd = 0;
 let isMuted = false;
 function preload() {
     soundFormats('mp3', 'ogg');
@@ -110,13 +115,13 @@ function draw() {
     }
     if (stage == 3) {
         if (p.isWinner) {
-        winMenu = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"You have completed the game and RGB's Adventure!","Thank you for playing!","Press R to restart.");
+        winMenu = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"You have completed the game and RGB's Adventure!","Thank you for playing!","Press R to restart.", "Time: " + minutesEnd + ":" + secondsEnd + ":" + millisecondsEnd);
         winMenu.drawMenu();
         menuMascot.drawMascot();
         p.xPos = 50;
     }
     if (p.isLoser) {
-        loseMenu = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"You have lost the game and costed RGB his colors :( ","Press R to restart.");
+        loseMenu = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"You have lost the game and costed RGB his colors :( ","Press R to restart.", "Time: " + minutesEnd + ":" + secondsEnd + ":" + millisecondsEnd);
         loseMenu.drawMenu();
         menuMascot.drawMascot();
         p.xPos = 50;

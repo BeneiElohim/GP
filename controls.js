@@ -19,6 +19,9 @@ function keyPressed() {
         stage = 0;
         p.lives = 3;
         p.score = 0;
+        seconds = 0;
+        minutes = 0;
+        milliseconds = 0;
         setup();
     }
 }
