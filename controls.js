@@ -15,7 +15,7 @@ function keyPressed() {
     if (keyCode == 77) {
         isMuted = !isMuted;
     }
-    if (keyCode == 82 && p.isWinner == true || keyCode == 82 && p.isLoser) {
+    if (keyCode == 82 && (p.isWinner == true || p.isLoser) && stage == 3) {
         stage = 0;
         p.lives = 3;
         p.score = 0;

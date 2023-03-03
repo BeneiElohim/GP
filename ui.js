@@ -98,7 +98,7 @@ function timer(){
     fill(255, 255, 255);
     noStroke();
     textSize(15);
-    text("Timer:" + minutes + ":" + seconds  + ":" + milliseconds, 20, 60);
+    text("Timer:" + minutes + ":" + seconds  + ":" + milliseconds, 930, 540);
     }
     if (stage == 3) {
         millisecondsEnd = milliseconds;

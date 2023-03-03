@@ -145,12 +145,13 @@ function startGame() {
     //camera
     cameraPosX = 0;
     //Menu
-
     flakes= []
     let flakeCount = 150;
     if (stage == 0) {
         flakeCount = 150;
-        isMenu = true;
+        if (p.lives == 3) {
+            isMenu = true;
+        }
     }
     else if (stage == 1) {
         flakeCount = 100;
