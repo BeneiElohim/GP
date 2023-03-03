@@ -10,6 +10,8 @@ var player = {
     isFalling: false,
     isPlummeting: false,
     isDead: false,
+    isWinner: false,
+    isLoser: false,
     speed: 1,
     walkingLeft: function() {
         fill(200, 0, 10)

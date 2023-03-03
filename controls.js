@@ -1,5 +1,4 @@
 function keyPressed() {
-
     if (!p.isPlummeting && (!isMenu || p.lives != 3) ) {
         if (keyCode == 65 || keyCode == 37) {
             p.isLeft = true;
@@ -9,16 +8,23 @@ function keyPressed() {
         }
         if ((keyCode == 87 || keyCode == 38) && !p.isFalling && !p.isPlummeting) {
             p.yPos = p.yPos - 180;
+            if (!isMuted) {
             jumpEffect.play();
         }
     }
     if (keyCode == 77) {
         isMuted = !isMuted;
     }
+    if (keyCode == 82 && p.isWinner == true || keyCode == 82 && p.isLoser) {
+        stage = 0;
+        p.lives = 3;
+        p.score = 0;
+        setup();
+    }
+}
 }
 function keyReleased() {
-    // if statements to control the animation of the character when
-    // keys are released.
+
     if (keyCode == 65 || keyCode == 37) {
         p.isLeft = false;
     }
@@ -27,7 +33,6 @@ function keyReleased() {
     }
 }
 function mousePressed() {
-    //if mouse is pressed, the menu will disappear
     isMenu = false;
     if (isMenu == true && isMuted == false && !lightInUs.isPlaying()) {
         lightInUs.play();

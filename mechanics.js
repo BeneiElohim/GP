@@ -100,7 +100,7 @@ function createPlatforms(x,y,length,updateRange){
         checkContact: function(gc_x, gc_y){
             if(gc_x > this.x && gc_x < this.x + this.length){
                 var d = this.y - gc_y;
-                if(d >= 0 && d < 5){
+                if(d >= 0 && d < 10){
                     console.log("contact on pt");
                     return true;
                 }

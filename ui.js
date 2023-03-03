@@ -85,3 +85,20 @@ function muteButton(){
     }
 
 }
+function timer(){
+    let milliseconds = frameCount % 60;
+    let minutes = floor(frameCount / 3600);
+   if (frameCount % 60 == 0 && !p.isPlummeting) { 
+        seconds++;
+    }
+    if (frameCount % 3600 == 0 && !p.isPlummeting) { 
+        minutes++;
+    }
+   
+    fill(255, 255, 255);
+    noStroke();
+    textSize(15);
+    text("Timer:" + minutes + "." + seconds  + "." + milliseconds, 20, 60);
+
+    
+}

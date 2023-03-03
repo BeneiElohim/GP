@@ -6,13 +6,13 @@ var cameraPosX;
 var flagpole;
 var collectables;
 var canyons;
-var menuFade = 255;
 var menuMascot;
 var lifeShape;
 var platforms;
 var welcomeScreen;
 var mountains;
 var flakes;
+let seconds = 0;
 let isMuted = false;
 function preload() {
     soundFormats('mp3', 'ogg');
@@ -30,7 +30,6 @@ function preload() {
 
 function setup() {
     //background
-
     createCanvas(1024, 576);
 
     floorPos_y = height * 3 / 4;
@@ -69,9 +68,6 @@ function draw() {
     
     flagpole.draw();
     p.checkDeath();
-    if (p.isDead) {
-        return;
-    }
     for (var i = 0; i < enemies.length; i++) {
         enemies[i].draw();
         var isContact = enemies[i].checkContact(p.xPos, p.yPos);
@@ -86,13 +82,11 @@ function draw() {
     //Score drawing function
     typeScore();
     drawLife();
+    timer();
     muteButton();
-    if (p.lives < 1) {
-        fill(255, 255, 255);
-        textSize(20);
-        text("GAME OVER", 500, 300);
-        text("Press space to continue.", 500, 350);
-        return;
+    if (p.lives == 0 && p.isLoser == false) {
+        stage = 3;
+        setup();
     }
     if (flagpole.isReached) {
         stage++;
@@ -114,9 +108,24 @@ function draw() {
     else if (isMuted == true){
         lightInUs.pause();
     }
-
+    if (stage == 3) {
+        if (p.isWinner) {
+        winMenu = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"You have completed the game and RGB's Adventure!","Thank you for playing!","Press R to restart.");
+        winMenu.drawMenu();
+        menuMascot.drawMascot();
+        p.xPos = 50;
+    }
+    if (p.isLoser) {
+        loseMenu = new MenuBox(500,150,20,color(0,0,0),color(255,255,255),kozminFont,250,150,"You have lost the game and costed RGB his colors :( ","Press R to restart.");
+        loseMenu.drawMenu();
+        menuMascot.drawMascot();
+        p.xPos = 50;
+    }
+}
+    
 }
 function startGame() {
+    setStage(stage);
     p.isFalling = false;
     p.isPlummeting = false;
     p.isLeft = false;
@@ -128,15 +137,15 @@ function startGame() {
     clouds = new Cloud(); //Creating a new cloud object
     mountains = new Mountain(color(54,35,18,220),color(270)); //Creating a new mountain object
     trees = new Tree(floorPos_y, Tree.trees_x, Tree.treePos_y);
-    setStage(stage);
     //camera
     cameraPosX = 0;
     //Menu
-    isMenu = true;
+
     flakes= []
     let flakeCount = 150;
     if (stage == 0) {
         flakeCount = 150;
+        isMenu = true;
     }
     else if (stage == 1) {
         flakeCount = 100;
@@ -159,7 +168,8 @@ function setStage() {
         case 2:
             setLevelThree();
             break;
-        default:
-            console.log("Invalid stage number " + stage);
+        case 3:
+            setLevelFour();
+            break;
     }
 }
