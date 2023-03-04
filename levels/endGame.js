@@ -1,35 +1,22 @@
 function setLevelFour(){
-    console.log("level 4");
-        collectables = []
-        var collectableArray = []
-        for (var i = 0; i < collectableArray.length; i++) {
-            collectables.push(new Collectable(collectableArray[i].x_pos, collectableArray[i].y_pos,collectableArray[i].isFound));
-        }
+        collectables = [] // Empty the array of collectables
+        // EMPTY THE ARRAYS OF COLLECTABLES, CANYONS, PLATFORMS AND ENEMIES
+        var collectableArray = [] 
         canyons = []
         var canyonArray  = []
-        for (var i = 0; i < canyonArray.length; i++) {
-            canyons.push(new Canyon(canyonArray[i].x_pos, canyonArray[i].y_pos, canyonArray[i].width));
-        }
         platforms = [];
-        var platformArray = [
-        ]
-        for (var i = 0; i < platformArray.length; i++) {
-            platforms.push(createPlatforms(platformArray[i].x_pos, platformArray[i].y_pos, platformArray[i].length, platformArray[i].updateRange));
-        }
+        var platformArray = []
         enemies = [];
         var enemyArray = []
-        for (var i = 0; i < enemyArray.length; i++) {
-            enemies.push(new Enemy(enemyArray[i].x_pos, enemyArray[i].y_pos, enemyArray[i].range, enemyArray[i].speed));
+        flagpoleLoc = { x_pos: 1800, y_pos: floorPos_y, isReached: false } // Flagpole location, off screen
+        flagpole = new Flagpole(flagpoleLoc.x_pos, flagpoleLoc.y_pos, flagpoleLoc.isReached); // Create a new flagpole object
+        if (p.lives > 0) { // If the player has lives left
+            p.isWinner = true; // Set the player to be a winner
+            p.isLoser = false; // Set the player to not be a loser
         }
-        flagpoleLoc = { x_pos: 1800, y_pos: floorPos_y, isReached: false }
-        flagpole = new Flagpole(flagpoleLoc.x_pos, flagpoleLoc.y_pos, flagpoleLoc.isReached);
-        if (p.lives > 0) {
-            p.isWinner = true;
-            p.isLoser = false;
-        }
-        if (p.lives == 0) {
-         p.isLoser = true;
-         p.isWinner = false;
+        if (p.lives == 0) { // If the player has no lives left
+         p.isLoser = true; // Set the player to be a loser
+         p.isWinner = false; // Set the player to not be a winner
         }
         
 }
